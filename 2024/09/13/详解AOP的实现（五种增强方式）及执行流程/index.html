@@ -170,8 +170,7 @@
             
           </div>
         
-        <p>@[toc]</p>
-<h1 id="AOP的简单介绍"><a href="#AOP的简单介绍" class="headerlink" title="AOP的简单介绍"></a>AOP的简单介绍</h1><p>AOP（Aspect Oriented Programming 面向切面编程）是一种通过运行期动态代理实现代码复用的机制，是对传统OOP(Object Oriented Programming，面向对象编程 )的补充。目前，Aspectj是Java社区里最完整最流行的AOP框架，在Spring 2.0以上版本中可以通过Aspectj注解或基于XML配置AOP。</p>
+        <h1 id="AOP的简单介绍"><a href="#AOP的简单介绍" class="headerlink" title="AOP的简单介绍"></a>AOP的简单介绍</h1><p>AOP（Aspect Oriented Programming 面向切面编程）是一种通过运行期动态代理实现代码复用的机制，是对传统OOP(Object Oriented Programming，面向对象编程 )的补充。目前，Aspectj是Java社区里最完整最流行的AOP框架，在Spring 2.0以上版本中可以通过Aspectj注解或基于XML配置AOP。</p>
 <h1 id="建立AOP实例工程"><a href="#建立AOP实例工程" class="headerlink" title="建立AOP实例工程"></a>建立AOP实例工程</h1><h2 id="工程结构如下图所示"><a href="#工程结构如下图所示" class="headerlink" title="工程结构如下图所示"></a>工程结构如下图所示</h2><p><img src="https://img-blog.csdnimg.cn/2019071614023511.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dhbmdfZGFfYmluZw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>ICalculatorService的源码如下：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.jd.calculator;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ICalculatorService</span> &#123;</span><br><span class="line">	<span class="type">int</span> <span class="title function_">mul</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span>;		</span><br><span class="line">    <span class="type">int</span> <span class="title function_">div</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>CalculatorService的源码如下：</strong></p>
@@ -323,7 +322,7 @@
 </div>
   <div class="realated__body">
     
-      DEBUG: 请安装插件 <a target="_blank" rel="noopener" href="https://github.com/tea3/hexo-related-popular-posts">hexo-related-popular-posts</a> 或关闭 related_post 配置!
+      
     
   </div>
 </div>
