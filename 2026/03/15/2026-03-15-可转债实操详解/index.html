@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf8" />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <title>
+      
+        可转债实操详解，一篇讲清楚 | 文客
+      
+    </title>
+    <meta name="description" content="菠菜的杂石录" />
+    <meta name="keywords" content="" />
+    
+      <link rel="apple-touch-icon"
+            sizes="180x180"
+            href="/images/logo.png" />
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/images/logo.png" />
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/images/logo.png" />
+    
+    
+      <link rel="mask-icon"
+            href="/images/logo.png"
+            color="" />
+    
+    
+    
+      
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/normal.ttf);
+        font-weight: normal;
+    }
+  </style>
+
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/bold.ttf);
+        font-weight: bold;
+    }
+  </style>
+
+
+    
+    <link rel="stylesheet"
+          type="text/css"
+          href='/css/layout.css' />
+    
+    
+  <link rel="stylesheet" type="text/css" href="/css/post.css"/>
+  
+
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    
+      <div id="search-mask" style="display:none">
+  <div class="search-main" id="search-main">
+    <div class="search__head">
+      <div class="search-form">
+        <svg t="1706347533072"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             version="1.1"
+             xmlns="http://www.w3.org/2000/svg"
+             p-id="7828"
+             width="20"
+             height="20">
+          <path d="M685.6 660.336l155.152 155.168a16 16 0 0 1 0 22.624l-11.312 11.328a16 16 0 0 1-22.624 0l-158.528-158.544a289.792 289.792 0 0 1-165.152 51.36C322.336 742.256 192 611.904 192 451.12 192 290.336 322.336 160 483.136 160c160.784 0 291.12 130.336 291.12 291.136 0 82.112-33.984 156.272-88.672 209.2z m-202.464 33.92c134.272 0 243.12-108.848 243.12-243.12C726.256 316.848 617.408 208 483.136 208 348.848 208 240 316.848 240 451.136c0 134.272 108.848 243.12 243.136 243.12z" fill="#000000" p-id="7829">
+          </path>
+        </svg>
+        <input id="search-input" placeholder="搜索文章">
+        <svg t="1706361500528"
+             id="search-clear"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             version="1.1"
+             xmlns="http://www.w3.org/2000/svg"
+             p-id="4351"
+             width="20"
+             height="20">
+          <path d="M512 562.688l-264.2944 264.2944-50.688-50.688L461.312 512 197.0176 247.7056l50.688-50.688L512 461.312l264.2944-264.2944 50.688 50.688L562.688 512l264.2944 264.2944-50.688 50.688L512 562.688z" fill="#00" p-id="4352">
+          </path>
+        </svg>
+      </div>
+    </div>
+    <div class="search__body" id="search-result"></div>
+    <div class="search__foot"></div>
+  </div>
+</div>
+
+    
+    <div class="head">
+      <div class="nav">
+        <a href='/' class="nav-logo">
+          <img alt="logo" height="60px" width="60px" src="/images/logo.png" />
+        </a>
+        <input id="navBtn" type="checkbox" />
+        <div class="nav-right">
+          
+            <div class="search-outer">
+  <div class="search" id="search-btn">
+    <svg t="1706347533072"
+         class="icon"
+         viewBox="0 0 1024 1024"
+         version="1.1"
+         xmlns="http://www.w3.org/2000/svg"
+         p-id="7828"
+         width="20"
+         height="20">
+      <path d="M685.6 660.336l155.152 155.168a16 16 0 0 1 0 22.624l-11.312 11.328a16 16 0 0 1-22.624 0l-158.528-158.544a289.792 289.792 0 0 1-165.152 51.36C322.336 742.256 192 611.904 192 451.12 192 290.336 322.336 160 483.136 160c160.784 0 291.12 130.336 291.12 291.136 0 82.112-33.984 156.272-88.672 209.2z m-202.464 33.92c134.272 0 243.12-108.848 243.12-243.12C726.256 316.848 617.408 208 483.136 208 348.848 208 240 316.848 240 451.136c0 134.272 108.848 243.12 243.136 243.12z" fill="#000000" p-id="7829">
+      </path>
+    </svg>
+    <span>搜索</span>
+    <span class="search-shortcut-key">Ctrl K</span>
+  </div>
+</div>
+
+          
+          <div class="nav-menu">
+            
+              
+                <a class="nav-menu-item" href="/Coding">Coding</a>
+              
+                <a class="nav-menu-item" href="/Finance">Finance</a>
+              
+                <a class="nav-menu-item" href="/Life">Life</a>
+              
+            
+            
+          </div>
+        </div>
+        <label class="nav-btn" for="navBtn"></label>
+      </div>
+    </div>
+    <div class="body">
+      
+  <article class="post-content">
+    <div class="post-inner">
+      <div class="post-content__head">
+        <div class="post-title">可转债实操详解，一篇讲清楚</div>
+        <div class="post-info">
+          
+  <a href="/tags/%E5%8F%AF%E8%BD%AC%E5%80%BA/" class="post-tag">#可转债</a><a href="/tags/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2/" class="post-tag">#投资理财</a><a href="/tags/%E6%95%99%E7%A8%8B/" class="post-tag">#教程</a>
+
+
+          <span class="post-date">2026-03-15</span>
+        </div>
+      </div>
+      
+      <div class="post-content__body">
+        
+          <div class="post-gallery">
+            
+          </div>
+        
+        <blockquote>
+<p>整理：小汀<br>编辑：小莎<br>终审：菠菜哒哒</p>
+</blockquote>
+<hr>
+<p>很多朋友问我，可转债到底怎么玩？今天干脆写一篇，把可转债的核心知识点一次性讲清楚。</p>
+<h2 id="一、什么是可转债？"><a href="#一、什么是可转债？" class="headerlink" title="一、什么是可转债？"></a>一、什么是可转债？</h2><p>可转债，全称”可转换公司债券”，简单理解就是：<strong>一种可以变成股票的债券</strong>。</p>
+<p>它有两个属性：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>债券属性</td>
+<td>持有到期，可以收回本金并获得利息</td>
+</tr>
+<tr>
+<td>股权属性</td>
+<td>可以转换成发行公司的股票</td>
+</tr>
+</tbody></table>
+<h3 id="债券属性"><a href="#债券属性" class="headerlink" title="债券属性"></a>债券属性</h3><ul>
+<li><strong>面值</strong>：100元&#x2F;张</li>
+<li><strong>期限</strong>：通常6年</li>
+<li><strong>利息</strong>：逐年递增，平均每年约1%</li>
+</ul>
+<p>以顺风转债为例：</p>
+<ul>
+<li>第一年：0.2%</li>
+<li>第二年：0.5%</li>
+<li>第三年：0.8%</li>
+<li>第四年：1.2%</li>
+<li>第五年：1.5%</li>
+<li>第六年：2.0%</li>
+<li>6年累计利息约5.2元</li>
+</ul>
+<h3 id="股权属性"><a href="#股权属性" class="headerlink" title="股权属性"></a>股权属性</h3><ul>
+<li>可以将可转债转换为发行公司的股票</li>
+<li>转换后与债券再无关系</li>
+<li>⚠️ <strong>转换是单向的：转股后不能转回债券</strong></li>
+</ul>
+<hr>
+<h2 id="二、可转债有哪些风险？"><a href="#二、可转债有哪些风险？" class="headerlink" title="二、可转债有哪些风险？"></a>二、可转债有哪些风险？</h2><h3 id="1-时间成本风险"><a href="#1-时间成本风险" class="headerlink" title="1. 时间成本风险"></a>1. 时间成本风险</h3><p>持有6年仅获得每年约1%的收益，资金利用率极低。如果你把这笔钱存银行或者买余额宝，说不定收益更高。</p>
+<h3 id="2-暴雷风险"><a href="#2-暴雷风险" class="headerlink" title="2. 暴雷风险"></a>2. 暴雷风险</h3><p><strong>暴雷定义</strong>：公司破产或赖账不还钱。</p>
+<p>好消息是：自1991年中国发行可转债以来30多年，<strong>暂无一家公司暴雷</strong>。但历史不代表未来，这点要清楚。</p>
+<h3 id="3-强赎风险（最重要⚠️）"><a href="#3-强赎风险（最重要⚠️）" class="headerlink" title="3. 强赎风险（最重要⚠️）"></a>3. 强赎风险（最重要⚠️）</h3><p>当正股价连续30天超过转股价**130%**时，上市公司有权强制赎回。</p>
+<ul>
+<li><strong>赎回价格</strong>：面值+当年利息</li>
+<li>如果被强赎，投资者可能损失转股收益</li>
+</ul>
+<h3 id="4-违约风险"><a href="#4-违约风险" class="headerlink" title="4. 违约风险"></a>4. 违约风险</h3><p>虽然历史无违约，但不代表未来不会。建议分散投资，不要重仓单一可转债。</p>
+<hr>
+<h2 id="三、可转债有什么优势？"><a href="#三、可转债有什么优势？" class="headerlink" title="三、可转债有什么优势？"></a>三、可转债有什么优势？</h2><h3 id="1-发行门槛高"><a href="#1-发行门槛高" class="headerlink" title="1. 发行门槛高"></a>1. 发行门槛高</h3><p>需要证监会审批，筛选了一批优质公司。</p>
+<h3 id="2-利息极低"><a href="#2-利息极低" class="headerlink" title="2. 利息极低"></a>2. 利息极低</h3><p>公司用低息（每年约1%）融资，对投资者来说也划算。</p>
+<h3 id="3-可以不还钱（核心优势🎯）"><a href="#3-可以不还钱（核心优势🎯）" class="headerlink" title="3. 可以不还钱（核心优势🎯）"></a>3. 可以不还钱（核心优势🎯）</h3><p>这是可转债最大的魅力：</p>
+<ul>
+<li>投资者可以转换为股票</li>
+<li>转股后公司无需还本付息</li>
+<li><strong>对投资者而言</strong>：上不封顶（股票上涨），下有保底（债券到期兑付）</li>
+</ul>
+<h3 id="4-条款保护"><a href="#4-条款保护" class="headerlink" title="4. 条款保护"></a>4. 条款保护</h3><ul>
+<li><strong>下调转股价条款</strong>：股价大跌时可下调转股价保护投资者</li>
+<li><strong>回售条款</strong>：股价大跌时投资者可回售给公司</li>
+</ul>
+<hr>
+<h2 id="四、核心指标详解"><a href="#四、核心指标详解" class="headerlink" title="四、核心指标详解"></a>四、核心指标详解</h2><h3 id="1-正股价"><a href="#1-正股价" class="headerlink" title="1. 正股价"></a>1. 正股价</h3><p>上市公司股票的市场价格，随时波动。</p>
+<h3 id="2-转股价"><a href="#2-转股价" class="headerlink" title="2. 转股价"></a>2. 转股价</h3><p>转换为股票的价格，这是可转债<strong>最核心的指标</strong>。</p>
+<h3 id="3-转股数量"><a href="#3-转股数量" class="headerlink" title="3. 转股数量"></a>3. 转股数量</h3><p><strong>计算公式</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">转股数量 = 债券张数 × 100 ÷ 转股价</span><br></pre></td></tr></table></figure>
+
+<p><strong>举例：顺风转债</strong></p>
+<ul>
+<li>转股价：40.41元</li>
+<li>一张可转债可转换股票数：100 ÷ 40.41 ≈ <strong>2.47股</strong></li>
+</ul>
+<h3 id="4-转股价值"><a href="#4-转股价值" class="headerlink" title="4. 转股价值"></a>4. 转股价值</h3><p><strong>计算公式</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">转股价值 = 正股价 ÷ 转股价 × 100</span><br></pre></td></tr></table></figure>
+
+<p><strong>举例：顺风转债</strong></p>
+<ul>
+<li>正股价：48.89元</li>
+<li>转股价：40.41元</li>
+<li>转股价值：48.89 ÷ 40.41 × 100 ≈ <strong>121元</strong></li>
+</ul>
+<blockquote>
+<p>转股价值 &gt; 100元时，转股有利润</p>
+</blockquote>
+<h3 id="5-溢价率"><a href="#5-溢价率" class="headerlink" title="5. 溢价率"></a>5. 溢价率</h3><p><strong>计算公式</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">溢价率 = (可转债价格 - 转股价值) ÷ 转股价值 × 100%</span><br></pre></td></tr></table></figure>
+
+<p><strong>举例</strong>：</p>
+<ul>
+<li>可转债价格：115元</li>
+<li>转股价值：121元</li>
+<li>溢价率 &#x3D; (115-121)÷121 × 100% ≈ <strong>-5%</strong></li>
+</ul>
+<p>负溢价表示折价，这时候转股更划算。</p>
+<hr>
+<h2 id="五、三大重要条款"><a href="#五、三大重要条款" class="headerlink" title="五、三大重要条款"></a>五、三大重要条款</h2><h3 id="1-强赎条款（强制赎回）"><a href="#1-强赎条款（强制赎回）" class="headerlink" title="1. 强赎条款（强制赎回）"></a>1. 强赎条款（强制赎回）</h3><ul>
+<li><strong>触发条件</strong>：正股价连续30个交易日中有15个交易日 ≥ 转股价的130%</li>
+<li><strong>赎回价格</strong>：面值 + 当年利息</li>
+<li><strong>投资者应对</strong>：要么转股，要么卖出，避免被强赎</li>
+</ul>
+<h3 id="2-下调转股价条款"><a href="#2-下调转股价条款" class="headerlink" title="2. 下调转股价条款"></a>2. 下调转股价条款</h3><ul>
+<li><strong>触发条件</strong>：正股价连续30个交易日中有15个交易日 &lt; 转股价的80%</li>
+<li><strong>下调限制</strong>：不能低于每股净资产</li>
+<li><strong>投资者意义</strong>：保护投资者利益，增加转股可能性</li>
+</ul>
+<h3 id="3-回售条款"><a href="#3-回售条款" class="headerlink" title="3. 回售条款"></a>3. 回售条款</h3><ul>
+<li><strong>触发条件</strong>：正股价连续30个交易日 &lt; 转股价的70%</li>
+<li><strong>回售价格</strong>：面值+当年利息（通常略高于强赎价）</li>
+<li><strong>投资者权利</strong>：可以选择回售给公司</li>
+</ul>
+<hr>
+<h2 id="六、何时转股？"><a href="#六、何时转股？" class="headerlink" title="六、何时转股？"></a>六、何时转股？</h2><p><strong>只有当转股价 &lt; 正股价时，转股才有利润。</strong></p>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>建议</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>正股价 &gt; 转股价</td>
+<td>可以考虑转股</td>
+</tr>
+<tr>
+<td>正股价 &#x3D; 转股价</td>
+<td>持有观察</td>
+</tr>
+<tr>
+<td>正股价 &lt; 转股价</td>
+<td>持有等待或卖出</td>
+</tr>
+</tbody></table>
+<p><strong>转股流程</strong>：</p>
+<ol>
+<li>确认转股价值 &gt; 可转债价格</li>
+<li>在证券账户中操作”债转股”</li>
+<li>T+1日获得股票</li>
+</ol>
+<hr>
+<h2 id="七、实用投资策略"><a href="#七、实用投资策略" class="headerlink" title="七、实用投资策略"></a>七、实用投资策略</h2><h3 id="摊大饼策略"><a href="#摊大饼策略" class="headerlink" title="摊大饼策略"></a>摊大饼策略</h3><p>分散买入多只可转债，降低单一违约风险。</p>
+<h3 id="筛选指标"><a href="#筛选指标" class="headerlink" title="筛选指标"></a>筛选指标</h3><ul>
+<li><strong>溢价率</strong>：越低越好（负溢价最佳）</li>
+<li><strong>到期收益率</strong>：越高越好（保底收益）</li>
+<li><strong>评级</strong>：AA级以上更安全</li>
+<li><strong>剩余年限</strong>：临近到期更安全</li>
+</ul>
+<h3 id="风险提示"><a href="#风险提示" class="headerlink" title="风险提示"></a>风险提示</h3><ul>
+<li>可转债并非<strong>完全无风险</strong></li>
+<li>建议用闲置资金投资</li>
+<li>长期持有为主，不要频繁交易</li>
+</ul>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><table>
+<thead>
+<tr>
+<th>要点</th>
+<th>关键信息</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>本质</td>
+<td>债券+股票的混合品种</td>
+</tr>
+<tr>
+<td>核心指标</td>
+<td>正股价、转股价、转股价值、溢价率</td>
+</tr>
+<tr>
+<td>最大优势</td>
+<td>上不封顶，下有保底</td>
+</tr>
+<tr>
+<td>最大风险</td>
+<td>强赎风险、时间成本</td>
+</tr>
+<tr>
+<td>投资要点</td>
+<td>分散投资、关注溢价率、警惕强赎</td>
+</tr>
+</tbody></table>
+<hr>
+<p><em>本文由小汀整理，小莎编辑，菠菜哒哒终审</em></p>
+<p><strong>📚 本期推荐</strong></p>
+<blockquote>
+<p><strong>《被讨厌的勇气》</strong></p>
+<ul>
+<li>作者：岸见一郎 &#x2F; 古贺史健</li>
+<li>推荐理由：这是一本读完后会让人”清醒”的书。它用对话的形式诠释了阿德勒心理学的核心观点：我们的不幸往往是自己选择的；别人如何评价你，那是别人的课题，你无法左右；所谓自由，就是”被讨厌的勇气”。如果你在人际关系中感到困惑或疲惫，这本书值得一读。</li>
+</ul>
+</blockquote>
+<div style="text-align: center; margin-top: 40px; padding: 20px; background: #f5f5f5; border-radius: 8px;">
+  <p style="font-size: 18px; font-weight: bold; margin-bottom: 15px;">欢迎关注我的公众号</p>
+  <p style="margin-bottom: 15px;">扫码关注「如是观世」，获取更多精彩内容</p>
+  <img src="/images/qrcode.jpg" alt="公众号二维码" style="width: 200px; height: 200px;">
+</div>
+
+      </div>
+    </div>
+    
+      <script src='https://unpkg.com/mermaid@latest/dist/mermaid.min.js'></script>
+      <script>
+        if (window.mermaid) {
+          mermaid.initialize({"startOnload":true});
+        }
+      </script>
+    
+  </article>
+  <div class="post__foot">
+    
+      <div class="like-author">
+  <input type="checkbox" id="likeCode" />
+  <div class="author-face">
+    <img height="100px"
+         width="100px"
+         id="front-face"
+         alt="author face"
+         src="/images/author.jpg" />
+    <img height="100px"
+         width="100px"
+         id="back-face"
+         alt="like code"
+         src="/images/pay.png" />
+  </div>
+  <div class="like-text">“给作者倒杯卡布奇诺”</div>
+  <label for="likeCode" class="like-btn">
+    <svg viewBox="0 0 1024 1024"
+         width="20px"
+         style="margin-right: 10px"
+         height="20px">
+      <path d="M466.88 908.96L113.824 563.296a270.08 270.08 0 0 1 0-387.392c108.8-106.56 284.896-106.56 393.696 0 1.504 1.472 2.976 2.944 4.448 4.48 1.472-1.536 2.944-3.008 4.448-4.48 108.8-106.56 284.896-106.56 393.696 0a269.952 269.952 0 0 1 34.016 347.072l-387.392 385.6a64 64 0 0 1-89.92 0.384z" p-id="13650" fill="#ee4242" />
+    </svg>
+    喜欢作者
+  </label>
+</div>
+
+    
+    <div class="post-nav">
+  
+    <div class="post-nav-item-left"></div>
+  
+  <div class="vhr"></div>
+  
+    <a class="post-nav-item-right" href="/2026/03/14/2026-03-14-OpenClaw%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E5%85%A8%E6%94%BB%E7%95%A5/">
+      <div class="text-align">
+        <span class="text-small">下一篇</span>
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             transform="scale(-1,-1)"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596" />
+        </svg>
+      </div>
+      OpenClaw 安装部署全攻略 - 最强 AI 助手本地运行指南
+    </a>
+  
+</div>
+
+    
+      <div class="related-post">
+  <div class="related__head">
+  <a href="/tags/%E5%8F%AF%E8%BD%AC%E5%80%BA/" class="post-tag">#可转债</a><a href="/tags/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2/" class="post-tag">#投资理财</a><a href="/tags/%E6%95%99%E7%A8%8B/" class="post-tag">#教程</a>
+
+</div>
+  <div class="realated__body">
+    
+      DEBUG: 请安装插件 <a target="_blank" rel="noopener" href="https://github.com/tea3/hexo-related-popular-posts">hexo-related-popular-posts</a> 或关闭 related_post 配置!
+    
+  </div>
+</div>
+
+    
+    
+  </div>
+
+    </div>
+    <div class="foot">
+      <div class="foot-inner">
+        <div class="foot__head">
+          
+            <div class="foot-line">
+              <div class="matts">海</div><div class="matts">内</div><div class="matts">存</div><div class="matts">知</div><div class="matts">己</div>
+            </div>
+          
+            <div class="foot-line">
+              <div class="matts">天</div><div class="matts">涯</div><div class="matts">若</div><div class="matts">比</div><div class="matts">邻</div>
+            </div>
+          
+        </div>
+        <div class="foot__body">
+          
+          
+            <div class="foot-item">
+              <div class="foot-item__head">账号</div>
+              <div class="foot-item__body">
+                
+                  <div class="text">
+                    <img alt="link" height="20px" width="20px" src="/images/logo-github.svg" />
+                    <a class="foot-link" target="_blank" rel="noopener" href="https://github.com/Laicise">Laicize</a>
+                  </div>
+                
+              </div>
+            </div>
+          
+          <div class="foot-item">
+            <div class="foot-item__head">联系</div>
+            <div class="foot-item__body">
+              <div class="text">
+                <img alt="link" height="20px" width="20px" src="/images/icon/icon-email.svg" />
+                <a class="foot-link" href="mailto:wenrenmoke12@gmail.com">wenrenmoke12@gmail.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <a href="https://laicise.github.io">文客</a> &nbsp;|&nbsp;由&nbsp;<a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>&nbsp;及&nbsp;
+          <svg width="20" height="20" viewBox="0 0 725 725">
+            <path fill-rule="evenodd" fill="rgb(221, 221, 221)" d="M145.870,236.632 L396.955,103.578 L431.292,419.44 L156.600,522.53 L145.870,236.632 Z" />
+            <path fill-rule="evenodd" fill="rgb(159, 159, 159)" d="M396.955,103.578 L564.345,234.486 L611.558,513.469 L431.292,419.44 L396.955,103.578 Z" />
+            <path fill-rule="evenodd" fill="rgb(0, 0, 0)" d="M431.292,419.44 L611.558,513.469 L358.327,595.18 L156.600,522.53 L431.292,419.44 Z" />
+          </svg>
+          <a target="_blank" rel="noopener" href="https://github.com/hooozen/hexo-theme-tranquility">致远</a>&nbsp;驱动
+        </div>
+      </div>
+    </div>
+    
+      <script src="https://unpkg.com/js-polyfills@0.1.43/es6.js"></script>
+      <script id="MathJax-script"
+              async
+              src="https://www.unpkg.com/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    
+    
+      <script src="/js/search.js"></script>
+      <script>searchInitialize("/search.json")</script>
+    
+    
+  
+
+  </body>
+</html>
