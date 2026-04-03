@@ -33,3 +33,13 @@
 .about-text-p {
   text-align: left;
 }
+/* 关于区域居中 */
+.about-text {
+  text-align: center;
+}
+.about-text-p {
+  text-align: center;
+}
+.about-detail {
+  text-align: center;
+}
