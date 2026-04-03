@@ -59,7 +59,7 @@
     
     
   <link rel="stylesheet" type="text/css" href="/css/post.css"/>
-  
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"/>
 
   <meta name="generator" content="Hexo 7.3.0"></head>
   <body>
@@ -379,6 +379,8 @@
 
     
     
+      <div id="gitalk-container"></div>
+    
   </div>
 
     </div>
@@ -442,6 +444,15 @@
       <script>searchInitialize("/search.json")</script>
     
     
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+  const param = JSON.parse('{"enable":true,"owner":"Laicise","admin":["Laicise"],"repo":"Laicise.github.io","clientID":"Ov23liA4XXVSKAlHdu95","clientSecret":"cc9faf7a00291852aa82555634266b5434fb8cc0","distractionFreeMode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN"}')
+  let title = location.pathname.substr(0, 50); 
+  param.id = title
+  const gitalk = new Gitalk(param)
+  gitalk.render('gitalk-container')
+</script>
+
   
 
   </body>
