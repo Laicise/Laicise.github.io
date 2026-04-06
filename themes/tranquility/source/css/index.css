@@ -1,0 +1,45 @@
+/* 简化 about 区域 */
+.about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-photo {
+  display: none; /* 隐藏图片 */
+}
+
+.about-text {
+  text-align: center;
+  font-family: sourceHanSerif;
+}
+
+.about-title {
+  font-size: 36px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.about-detail {
+  font-size: 18px;
+  line-height: 1.8;
+  letter-spacing: 0.1em;
+}
+
+.about-text-p {
+  text-align: left;
+}
+/* 关于区域居中 */
+.about-text {
+  text-align: center;
+}
+.about-text-p {
+  text-align: center;
+}
+.about-detail {
+  text-align: center;
+}

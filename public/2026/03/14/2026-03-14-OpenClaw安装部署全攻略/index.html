@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf8" />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <title>
+      
+        OpenClaw 安装部署全攻略 - 最强 AI 助手本地运行指南 | 文客 | 菠菜
+      
+    </title>
+    <meta name="description" content="记录编程、投资与生活的杂谈随笔" />
+    <meta name="keywords" content="" />
+    
+      <link rel="apple-touch-icon"
+            sizes="180x180"
+            href="/images/logo.png" />
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/images/logo.png" />
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/images/logo.png" />
+    
+    
+      <link rel="mask-icon"
+            href="/images/logo.png"
+            color="" />
+    
+    
+    
+      
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/normal.ttf);
+        font-weight: normal;
+    }
+  </style>
+
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/bold.ttf);
+        font-weight: bold;
+    }
+  </style>
+
+
+    
+    <link rel="stylesheet"
+          type="text/css"
+          href='/css/layout.css' />
+    
+    
+  <link rel="stylesheet" type="text/css" href="/css/post.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"/>
+
+  <meta name="generator" content="Hexo 8.1.1"></head>
+  <body>
+    
+      <div id="search-mask" style="display:none">
+  <div class="search-main" id="search-main">
+    <div class="search__head">
+      <div class="search-form">
+        <svg t="1706347533072"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             version="1.1"
+             xmlns="http://www.w3.org/2000/svg"
+             p-id="7828"
+             width="20"
+             height="20">
+          <path d="M685.6 660.336l155.152 155.168a16 16 0 0 1 0 22.624l-11.312 11.328a16 16 0 0 1-22.624 0l-158.528-158.544a289.792 289.792 0 0 1-165.152 51.36C322.336 742.256 192 611.904 192 451.12 192 290.336 322.336 160 483.136 160c160.784 0 291.12 130.336 291.12 291.136 0 82.112-33.984 156.272-88.672 209.2z m-202.464 33.92c134.272 0 243.12-108.848 243.12-243.12C726.256 316.848 617.408 208 483.136 208 348.848 208 240 316.848 240 451.136c0 134.272 108.848 243.12 243.136 243.12z" fill="#000000" p-id="7829">
+          </path>
+        </svg>
+        <input id="search-input" placeholder="搜索文章">
+        <svg t="1706361500528"
+             id="search-clear"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             version="1.1"
+             xmlns="http://www.w3.org/2000/svg"
+             p-id="4351"
+             width="20"
+             height="20">
+          <path d="M512 562.688l-264.2944 264.2944-50.688-50.688L461.312 512 197.0176 247.7056l50.688-50.688L512 461.312l264.2944-264.2944 50.688 50.688L562.688 512l264.2944 264.2944-50.688 50.688L512 562.688z" fill="#00" p-id="4352">
+          </path>
+        </svg>
+      </div>
+    </div>
+    <div class="search__body" id="search-result"></div>
+    <div class="search__foot"></div>
+  </div>
+</div>
+
+    
+    <div class="head">
+      <div class="nav">
+        <a href='/' class="nav-logo">
+          <img alt="logo" height="60px" width="60px" src="/images/logo2.png" />
+        </a>
+        <input id="navBtn" type="checkbox" />
+        <div class="nav-right">
+          
+            <div class="search-outer">
+  <div class="search" id="search-btn">
+    <svg t="1706347533072"
+         class="icon"
+         viewBox="0 0 1024 1024"
+         version="1.1"
+         xmlns="http://www.w3.org/2000/svg"
+         p-id="7828"
+         width="20"
+         height="20">
+      <path d="M685.6 660.336l155.152 155.168a16 16 0 0 1 0 22.624l-11.312 11.328a16 16 0 0 1-22.624 0l-158.528-158.544a289.792 289.792 0 0 1-165.152 51.36C322.336 742.256 192 611.904 192 451.12 192 290.336 322.336 160 483.136 160c160.784 0 291.12 130.336 291.12 291.136 0 82.112-33.984 156.272-88.672 209.2z m-202.464 33.92c134.272 0 243.12-108.848 243.12-243.12C726.256 316.848 617.408 208 483.136 208 348.848 208 240 316.848 240 451.136c0 134.272 108.848 243.12 243.136 243.12z" fill="#000000" p-id="7829">
+      </path>
+    </svg>
+    <span>搜索</span>
+    <span class="search-shortcut-key">Ctrl K</span>
+  </div>
+</div>
+
+          
+          <div class="nav-menu">
+            
+              
+                <a class="nav-menu-item" href="/Coding">Coding</a>
+              
+                <a class="nav-menu-item" href="/Finance">Finance</a>
+              
+                <a class="nav-menu-item" href="/Life">Life</a>
+              
+            
+            
+          </div>
+        </div>
+        <label class="nav-btn" for="navBtn"></label>
+      </div>
+    </div>
+    <div class="body">
+      
+  <article class="post-content">
+    <div class="post-inner">
+      <div class="post-content__head">
+        <div class="post-title">OpenClaw 安装部署全攻略 - 最强 AI 助手本地运行指南</div>
+        <div class="post-info">
+          
+  <a href="/tags/openclaw/" class="post-tag">#openclaw</a><a href="/tags/ai/" class="post-tag">#ai</a><a href="/tags/feishu/" class="post-tag">#feishu</a><a href="/tags/tutorial/" class="post-tag">#tutorial</a>
+
+
+          <span class="post-date">2026-03-14</span>
+        </div>
+      </div>
+      
+      <div class="post-content__body">
+        
+          <div class="post-gallery">
+            
+          </div>
+        
+        <p>你是否想过在飞书里直接调用本地运行的 AI 模型？你是否想要一个专属的「本地 AI 中控大脑」？今天这篇教程，带你从零开始，在 Windows 和 Linux&#x2F;Mac 上安装 OpenClaw，并完成飞书配置！</p>
+<hr>
+<h2 id="什么是-OpenClaw？"><a href="#什么是-OpenClaw？" class="headerlink" title="什么是 OpenClaw？"></a>什么是 OpenClaw？</h2><p>OpenClaw 是一个强大的本地 AI 助手框架，可以让你在自己的机器上运行 AI 代理。它支持：</p>
+<ul>
+<li>🤖 <strong>多模型接入</strong> - Claude、GPT、Gemini、MiniMax 等</li>
+<li>💬 <strong>多渠道接入</strong> - Telegram、Discord、WhatsApp、飞书、微信等</li>
+<li>🖥️ <strong>网页 UI</strong> - 完整的控制面板</li>
+<li>🔌 <strong>插件系统</strong> - 丰富的扩展能力</li>
+<li>📴 <strong>本地运行</strong> - 数据本地存储，保护隐私</li>
+</ul>
+<blockquote>
+<p>注：龙虾官网 <a target="_blank" rel="noopener" href="https://openclaw.ai/">https://openclaw.ai/</a></p>
+</blockquote>
+<hr>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>在开始之前，你需要准备：</p>
+<ul>
+<li><strong>Node.js 22+</strong> （安装脚本会自动检测，如未安装会提示）</li>
+<li><strong>飞书账号</strong>（需要开发者后台权限）</li>
+<li><strong>一台电脑</strong>（Windows、Linux 或 macOS）</li>
+</ul>
+<hr>
+<h2 id="一、Windows-安装指南"><a href="#一、Windows-安装指南" class="headerlink" title="一、Windows 安装指南"></a>一、Windows 安装指南</h2><h3 id="步骤一：检查-Node-js-环境"><a href="#步骤一：检查-Node-js-环境" class="headerlink" title="步骤一：检查 Node.js 环境"></a>步骤一：检查 Node.js 环境</h3><p>首先确认你是否已安装 Node.js。打开 <strong>PowerShell</strong>，输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
+
+<p>如果显示版本号（如 v22.x.x），说明已安装；如果提示「找不到命令」，需要先去 <a target="_blank" rel="noopener" href="https://nodejs.org/">Node.js 官网</a> 下载安装。<br><img src="https://gitee.com/Laicize/images/raw/master/img/20260310151253423.png" alt="image.png"></p>
+<h3 id="步骤二：一键安装-OpenClaw"><a href="#步骤二：一键安装-OpenClaw" class="headerlink" title="步骤二：一键安装 OpenClaw"></a>步骤二：一键安装 OpenClaw</h3><p>以<strong>管理员身份</strong>打开 PowerShell，复制以下命令执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iwr -useb https://openclaw.ai/install.ps1 | iex</span><br></pre></td></tr></table></figure>
+
+<p>安装过程会自动完成以下操作：</p>
+<ul>
+<li>✅ 检测 Node.js 版本</li>
+<li>✅ 安装 OpenClaw CLI</li>
+<li>✅ 启动初始化向导</li>
+</ul>
+<h3 id="步骤三：初始化配置"><a href="#步骤三：初始化配置" class="headerlink" title="步骤三：初始化配置"></a>步骤三：初始化配置</h3><p>安装完成后，终端会提示你进行初始化配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openclaw onboard</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-1-选择安装类型"><a href="#3-1-选择安装类型" class="headerlink" title="3.1 选择安装类型"></a>3.1 选择安装类型</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">OpenClaw 安装向导</span><br><span class="line">请选择安装类型：</span><br><span class="line">1) 快速入门 (推荐)</span><br><span class="line">2) 自定义安装</span><br><span class="line">3) 仅安装 CLI</span><br></pre></td></tr></table></figure>
+
+<p><strong>新手建议选择「快速入门」</strong>，会自动配置最常用的功能。</p>
+<h4 id="3-2-配置模型"><a href="#3-2-配置模型" class="headerlink" title="3.2 配置模型"></a>3.2 配置模型</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">选择 AI 模型：</span><br><span class="line">1) Claude</span><br><span class="line">2) GPT</span><br><span class="line">3) Gemini</span><br><span class="line">4) MiniMax</span><br></pre></td></tr></table></figure>
+
+<p>选择你已有的模型 API。如果选择 MiniMax，需要：</p>
+<ol>
+<li><p>如果没用再引导界面选择模型，运行openclaw configure<br><img src="https://gitee.com/Laicize/images/raw/master/img/20260310151543073.png" alt="image.png"></p>
+</li>
+<li><p>Where will the Gateway run? → 选择 <strong>Local (this machine)</strong></p>
+</li>
+<li><p>Select sections to configure → 选择 <strong>Model</strong></p>
+</li>
+<li><p>Model&#x2F;auth provider → 选择 <strong>MiniMax</strong></p>
+</li>
+<li><p>MiniMax auth method → 选择<strong>MiniMax OAuth</strong></p>
+</li>
+<li><p>MiniMax endpoint → 选择 <strong>CN</strong></p>
+</li>
+<li><p>自动弹出登录页，登录并授权<br><img src="https://gitee.com/Laicize/images/raw/master/img/20260310151723939.png" alt="image.png"></p>
+</li>
+<li><p>确认模型选择（默认勾选 <code>minimax-portal/MiniMax-M2.1</code> 和 <code>minimax-portal/MiniMax-M2.5</code>）<br><img src="https://gitee.com/Laicize/images/raw/master/img/20260310151753761.png" alt="image.png"></p>
+</li>
+<li><p>测试对话</p>
+</li>
+</ol>
+<p>输入 <code>openclaw tui</code>，若成功对话则表示配置成功：<br><img src="https://gitee.com/Laicize/images/raw/master/img/20260310151856619.png" alt="image.png"></p>
+<h4 id="3-3-配置渠道"><a href="#3-3-配置渠道" class="headerlink" title="3.3 配置渠道"></a>3.3 配置渠道</h4><blockquote>
+<p>注：如果已经配置好openclaw以及模型后端，可以试试用openclaw安装通信前端</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">选择要接入的渠道：</span><br><span class="line">□ Telegram</span><br><span class="line">□ Discord</span><br><span class="line">□ 飞书</span><br><span class="line">□ WhatsApp</span><br></pre></td></tr></table></figure>
+
+<p>先跳过，后续单独配置飞书。</p>
+<blockquote>
+<p>💡 <strong>提示</strong>：如果你在安装过程中遇到 <code>spawn npm ENOENT</code> 错误，可以手动创建目录后重试：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">New-Item -ItemType Directory -Force -Path ~\.openclaw\plugins</span><br><span class="line">cd ~\.openclaw\plugins</span><br><span class="line">npm install &quot;openclaw&quot;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="步骤四：验证安装"><a href="#步骤四：验证安装" class="headerlink" title="步骤四：验证安装"></a>步骤四：验证安装</h3><p>安装完成后，运行以下命令验证：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 检查状态</span><br><span class="line">openclaw status</span><br><span class="line"></span><br><span class="line"># 检查配置</span><br><span class="line">openclaw doctor</span><br></pre></td></tr></table></figure>
+
+<p>如果看到类似输出，说明安装成功：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">✅ Gateway: 运行中</span><br><span class="line">✅ 模型: 已配置</span><br><span class="line">✅ 渠道: 已连接</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="二、Linux-macOS-安装指南"><a href="#二、Linux-macOS-安装指南" class="headerlink" title="二、Linux &#x2F; macOS 安装指南"></a>二、Linux &#x2F; macOS 安装指南</h2><h3 id="步骤一：系统准备"><a href="#步骤一：系统准备" class="headerlink" title="步骤一：系统准备"></a>步骤一：系统准备</h3><p>确保你的系统满足以下条件：</p>
+<ul>
+<li>Ubuntu 20.04+ &#x2F; Debian 11+ &#x2F; CentOS 8+ &#x2F; macOS</li>
+<li>已安装 <code>curl</code></li>
+</ul>
+<h3 id="步骤二：一键安装-OpenClaw-1"><a href="#步骤二：一键安装-OpenClaw-1" class="headerlink" title="步骤二：一键安装 OpenClaw"></a>步骤二：一键安装 OpenClaw</h3><p>打开终端，执行官方安装脚本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://openclaw.ai/install.sh | bash</span><br></pre></td></tr></table></figure>
+
+<p>安装脚本会自动：</p>
+<ul>
+<li>检测 Node.js 版本，如未安装则自动安装</li>
+<li>安装 OpenClaw CLI 到全局</li>
+<li>提示是否运行初始化向导</li>
+</ul>
+<h3 id="步骤三：初始化配置-1"><a href="#步骤三：初始化配置-1" class="headerlink" title="步骤三：初始化配置"></a>步骤三：初始化配置</h3><p>同样运行初始化命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openclaw onboard</span><br></pre></td></tr></table></figure>
+
+<p>按照提示完成：选择模型供应商、配置 API Key、跳过 Channel 配置。</p>
+<h3 id="步骤四：验证安装-1"><a href="#步骤四：验证安装-1" class="headerlink" title="步骤四：验证安装"></a>步骤四：验证安装</h3><p>运行以下命令检查状态：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">openclaw doctor        # 检查配置问题</span><br><span class="line">openclaw status        # 查看网关状态</span><br><span class="line">openclaw dashboard     # 打开浏览器管理界面</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="三、飞书配置详解"><a href="#三、飞书配置详解" class="headerlink" title="三、飞书配置详解"></a>三、飞书配置详解</h2><h3 id="步骤一：创建飞书企业自建应用"><a href="#步骤一：创建飞书企业自建应用" class="headerlink" title="步骤一：创建飞书企业自建应用"></a>步骤一：创建飞书企业自建应用</h3><ol>
+<li>访问 <a target="_blank" rel="noopener" href="https://open.feishu.cn/">飞书开放平台</a></li>
+<li>登录你的飞书账号</li>
+<li>进入<strong>开发者后台</strong></li>
+<li>点击「创建企业自建应用」<br><img src="https://gitee.com/Laicize/images/raw/master/img/20260310160834156.png" alt="image.png"></li>
+</ol>
+<h3 id="步骤二：获取应用凭证"><a href="#步骤二：获取应用凭证" class="headerlink" title="步骤二：获取应用凭证"></a>步骤二：获取应用凭证</h3><p>创建成功后，在应用详情页获取：</p>
+<ul>
+<li><strong>App ID</strong></li>
+<li><strong>App Secret</strong><br><img src="https://gitee.com/Laicize/images/raw/master/img/20260310160846849.png" alt="image.png"></li>
+</ul>
+<blockquote>
+<p>⚠️ <strong>重要</strong>：这两个值一定要记下来，后续配置 OpenClaw 时需要用到！</p>
+</blockquote>
+<h3 id="步骤三：添加机器人能力"><a href="#步骤三：添加机器人能力" class="headerlink" title="步骤三：添加机器人能力"></a>步骤三：添加机器人能力</h3><ol>
+<li>在应用功能配置中，找到「应用能力」</li>
+<li>点击「添加机器人」</li>
+<li>确认添加成功<br><img src="https://gitee.com/Laicize/images/raw/master/img/20260310160901570.png" alt="image.png"></li>
+</ol>
+<h3 id="步骤四：配置权限"><a href="#步骤四：配置权限" class="headerlink" title="步骤四：配置权限"></a>步骤四：配置权限</h3><p>进入「权限管理 → 开通权限」，勾选以下必要权限：</p>
+<ul>
+<li><code>im:message</code> - 消息收发</li>
+<li><code>im:message:send_as_bot</code> - 机器人发送消息</li>
+<li><code>im:message:readonly</code> - 读取消息</li>
+<li><code>im:chat.members:bot_access</code> - 群聊成员访问</li>
+</ul>
+<p>或者使用 <strong>JSON 批量导入</strong>（推荐）：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;scopes&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;tenant&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">      <span class="string">&quot;aily:file:read&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="string">&quot;aily:file:write&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="string">&quot;im:chat.access_event.bot_p2p_chat:read&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="string">&quot;im:chat.members:bot_access&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="string">&quot;im:message&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="string">&quot;im:message.group_at_msg:readonly&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="string">&quot;im:message.p2p_msg:readonly&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="string">&quot;im:message:readonly&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="string">&quot;im:message:send_as_bot&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="string">&quot;im:resource&quot;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;user&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">      <span class="string">&quot;aily:file:read&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="string">&quot;aily:file:write&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="string">&quot;im:chat.access_event.bot_p2p_chat:read&quot;</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/Laicize/images/raw/master/img/20260310160913000.png" alt="image.png"></p>
+<h3 id="步骤五：创建版本并发布"><a href="#步骤五：创建版本并发布" class="headerlink" title="步骤五：创建版本并发布"></a>步骤五：创建版本并发布</h3><ol>
+<li>进入「版本管理与发布」</li>
+<li>创建新版本，填写版本说明</li>
+<li>提交并发布</li>
+</ol>
+<blockquote>
+<p>如果设置了免审核策略，发布后会在飞书收到「审批通过」消息</p>
+</blockquote>
+<hr>
+<p><img src="https://gitee.com/Laicize/images/raw/master/img/20260310160923741.png" alt="image.png"></p>
+<h2 id="四、OpenClaw-飞书插件配置"><a href="#四、OpenClaw-飞书插件配置" class="headerlink" title="四、OpenClaw 飞书插件配置"></a>四、OpenClaw 飞书插件配置</h2><h3 id="步骤一：安装飞书插件"><a href="#步骤一：安装飞书插件" class="headerlink" title="步骤一：安装飞书插件"></a>步骤一：安装飞书插件</h3><p>在终端执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openclaw plugins install @m1heng-clawd/feishu</span><br></pre></td></tr></table></figure>
+
+<p>如果遇到目录问题，手动创建：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/.openclaw/plugins</span><br><span class="line">cd ~/.openclaw/plugins</span><br><span class="line">npm install &quot;@m1heng-clawd/feishu&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="步骤二：配置飞书-Channel"><a href="#步骤二：配置飞书-Channel" class="headerlink" title="步骤二：配置飞书 Channel"></a>步骤二：配置飞书 Channel</h3><p>运行配置命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openclaw config</span><br></pre></td></tr></table></figure>
+
+<p>按照提示操作：</p>
+<ol>
+<li>选择「本地网关」</li>
+<li>选择「Channel 配置」</li>
+<li>选择「Feishu&#x2F;Lark（飞书）」</li>
+<li>输入 <strong>App ID</strong> 和 <strong>App Secret</strong></li>
+<li>选择「飞书中国」版本</li>
+<li>勾选「允许群组聊天」</li>
+</ol>
+<p><strong>或者使用环境变量配置：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Linux/macOS</span><br><span class="line">export FEISHU_APP_ID=&quot;你的AppID&quot;</span><br><span class="line">export FEISHU_APP_SECRET=&quot;你的AppSecret&quot;</span><br><span class="line"></span><br><span class="line"># Windows PowerShell</span><br><span class="line">$env:FEISHU_APP_ID=&quot;你的AppID&quot;</span><br><span class="line">$env:FEISHU_APP_SECRET=&quot;你的AppSecret&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="步骤三：重启网关"><a href="#步骤三：重启网关" class="headerlink" title="步骤三：重启网关"></a>步骤三：重启网关</h3><p>配置完成后，重启 OpenClaw 网关：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openclaw gateway</span><br></pre></td></tr></table></figure>
+
+<p>当看到类似以下日志，说明飞书通道已注册成功：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[Feishu] Channel initialized successfully</span><br><span class="line">[Feishu] Bot info: xxx</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="五、飞书事件订阅配置"><a href="#五、飞书事件订阅配置" class="headerlink" title="五、飞书事件订阅配置"></a>五、飞书事件订阅配置</h2><h3 id="步骤一：启用事件与回调"><a href="#步骤一：启用事件与回调" class="headerlink" title="步骤一：启用事件与回调"></a>步骤一：启用事件与回调</h3><ol>
+<li>回到飞书开放平台应用后台</li>
+<li>进入「开发配置」</li>
+<li>找到「事件与回调」</li>
+<li>选择「使用长连接接收事件」</li>
+</ol>
+<h3 id="步骤二：订阅事件"><a href="#步骤二：订阅事件" class="headerlink" title="步骤二：订阅事件"></a>步骤二：订阅事件</h3><p>在「事件订阅」中点击「添加事件」，根据需要勾选：</p>
+<ul>
+<li><code>im.message.p2p_msg.received</code> - 私聊消息事件</li>
+<li><code>im.message.group_at_msg.received</code> - 群聊@消息事件</li>
+<li><code>im.message.message_sent.received</code> - 消息发送事件</li>
+</ul>
+<hr>
+<h2 id="六、测试与使用"><a href="#六、测试与使用" class="headerlink" title="六、测试与使用"></a>六、测试与使用</h2><h3 id="步骤一：重新发布应用"><a href="#步骤一：重新发布应用" class="headerlink" title="步骤一：重新发布应用"></a>步骤一：重新发布应用</h3><p>完成所有配置后，记得在飞书开放平台<strong>重新发布新版本</strong>。</p>
+<h3 id="步骤二：在飞书中体验"><a href="#步骤二：在飞书中体验" class="headerlink" title="步骤二：在飞书中体验"></a>步骤二：在飞书中体验</h3><ol>
+<li>打开飞书「工作台」或「应用管理」</li>
+<li>找到你的企业自建应用</li>
+<li>安装并进入对话界面</li>
+</ol>
+<p>现在你可以：</p>
+<ul>
+<li>📝 <strong>发送消息</strong>：直接给机器人发消息</li>
+<li>👥 **群聊@**：在群聊中 @机器人 下达指令</li>
+<li>📎 <strong>文件处理</strong>：让 AI 分析文档内容</li>
+</ul>
+<h3 id="示例指令："><a href="#示例指令：" class="headerlink" title="示例指令："></a>示例指令：</h3><blockquote>
+<p>「帮我总结一下这段会议记录」 「根据这个文档，列出重点和风险」 「帮我写一个笑话，保存到桌面」</p>
+</blockquote>
+<hr>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><p><strong>Q1：安装时报错 <code>sharp</code> 失败？</strong></p>
+<p>尝试设置环境变量后重试：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHARP_IGNORE_GLOBAL_LIBVIPS=1 npm install -g openclaw</span><br></pre></td></tr></table></figure>
+
+<p><strong>Q2：飞书消息收不到？</strong></p>
+<p>检查以下几点：</p>
+<ol>
+<li>应用是否已发布</li>
+<li>事件订阅是否配置</li>
+<li>回调地址是否能访问</li>
+<li>OpenClaw 网关是否正常运行</li>
+</ol>
+<p><strong>Q3：如何更新 OpenClaw？</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm update -g openclaw</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过以上步骤，你已经完成了：</p>
+<ol>
+<li>✅ 在 Windows&#x2F;Linux&#x2F;macOS 安装 OpenClaw</li>
+<li>✅ 创建飞书企业自建应用</li>
+<li>✅ 配置应用权限和事件订阅</li>
+<li>✅ 在 OpenClaw 中安装飞书插件</li>
+<li>✅ 实现飞书与本地 AI 的互通</li>
+</ol>
+<p><strong>飞书只是入口，OpenClaw 才是你的本地 AI 中枢！</strong></p>
+<p>现在，打开飞书，给你的 AI 机器人发送第一条指令吧 🦞</p>
+<hr>
+<div style="text-align: center; margin-top: 40px; padding: 20px; background: #f5f5f5; border-radius: 8px;">
+  <p style="font-size: 18px; font-weight: bold; margin-bottom: 15px;">欢迎关注我的公众号</p>
+  <p style="margin-bottom: 15px;">扫码关注「如是观世」，获取更多精彩内容</p>
+  <img src="/images/qrcode.jpg" alt="公众号二维码" style="width: 200px; height: 200px;">
+</div>
+
+      </div>
+    </div>
+    
+      <script src='https://unpkg.com/mermaid@latest/dist/mermaid.min.js'></script>
+      <script>
+        if (window.mermaid) {
+          mermaid.initialize({"startOnload":true});
+        }
+      </script>
+    
+  </article>
+  <div class="post__foot">
+    
+      <div class="like-author">
+  <input type="checkbox" id="likeCode" />
+  <div class="author-face">
+    <img height="100px"
+         width="100px"
+         id="front-face"
+         alt="author face"
+         src="/images/author.jpg" />
+    <img height="100px"
+         width="100px"
+         id="back-face"
+         alt="like code"
+         src="/images/pay.png" />
+  </div>
+  <div class="like-text">“给作者倒杯卡布奇诺”</div>
+  <label for="likeCode" class="like-btn">
+    <svg viewBox="0 0 1024 1024"
+         width="20px"
+         style="margin-right: 10px"
+         height="20px">
+      <path d="M466.88 908.96L113.824 563.296a270.08 270.08 0 0 1 0-387.392c108.8-106.56 284.896-106.56 393.696 0 1.504 1.472 2.976 2.944 4.448 4.48 1.472-1.536 2.944-3.008 4.448-4.48 108.8-106.56 284.896-106.56 393.696 0a269.952 269.952 0 0 1 34.016 347.072l-387.392 385.6a64 64 0 0 1-89.92 0.384z" p-id="13650" fill="#ee4242" />
+    </svg>
+    喜欢作者
+  </label>
+</div>
+
+    
+    <div class="post-nav">
+  
+    <a class="post-nav-item-left" href="/2026/03/14/2026-03-14-%E7%94%9F%E6%B4%BB%E7%A2%8E%E7%A2%8E%E5%BF%B5-%E8%87%AA%E7%94%B1/">
+      <div class="text-align">
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596" />
+        </svg>
+        <span class="text-small">上一篇</span>
+      </div>
+      <div>生活碎碎念 - 自由</div>
+    </a>
+  
+  <div class="vhr"></div>
+  
+    <a class="post-nav-item-right" href="/2026/03/14/2026-03-14-%E8%B5%84%E4%BA%A7%E9%85%8D%E7%BD%AE%E7%AD%96%E7%95%A5%E8%AF%A6%E8%A7%A3/">
+      <div class="text-align">
+        <span class="text-small">下一篇</span>
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             transform="scale(-1,-1)"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596" />
+        </svg>
+      </div>
+      2026-2031资产配置策略详解
+    </a>
+  
+</div>
+
+    
+      <div class="related-post">
+  <div class="related__head">
+  <a href="/tags/openclaw/" class="post-tag">#openclaw</a><a href="/tags/ai/" class="post-tag">#ai</a><a href="/tags/feishu/" class="post-tag">#feishu</a><a href="/tags/tutorial/" class="post-tag">#tutorial</a>
+
+</div>
+  <div class="realated__body">
+    
+      
+    
+  </div>
+</div>
+
+    
+    
+      <div id="gitalk-container"></div>
+    
+  </div>
+
+    </div>
+    <div class="foot">
+      <div class="foot-inner">
+        <div class="foot__head">
+          
+            <div class="foot-line">
+              <div class="matts">海</div><div class="matts">内</div><div class="matts">存</div><div class="matts">知</div><div class="matts">己</div>
+            </div>
+          
+            <div class="foot-line">
+              <div class="matts">天</div><div class="matts">涯</div><div class="matts">若</div><div class="matts">比</div><div class="matts">邻</div>
+            </div>
+          
+        </div>
+        <div class="foot__body">
+          
+          
+            <div class="foot-item">
+              <div class="foot-item__head">账号</div>
+              <div class="foot-item__body">
+                
+                  <div class="text">
+                    <img alt="link" height="20px" width="20px" src="/images/logo-github.svg" />
+                    <a class="foot-link" target="_blank" rel="noopener" href="https://github.com/Laicise">Laicize</a>
+                  </div>
+                
+              </div>
+            </div>
+          
+          <div class="foot-item">
+            <div class="foot-item__head">联系</div>
+            <div class="foot-item__body">
+              <div class="text">
+                <img alt="link" height="20px" width="20px" src="/images/icon/icon-email.svg" />
+                <a class="foot-link" href="mailto:wenrenmoke12@gmail.com">wenrenmoke12@gmail.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <a href="https://laicise.github.io">文客 | 菠菜</a> &nbsp;|&nbsp;由&nbsp;<a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>&nbsp;及&nbsp;
+          <svg width="20" height="20" viewBox="0 0 725 725">
+            <path fill-rule="evenodd" fill="rgb(221, 221, 221)" d="M145.870,236.632 L396.955,103.578 L431.292,419.44 L156.600,522.53 L145.870,236.632 Z" />
+            <path fill-rule="evenodd" fill="rgb(159, 159, 159)" d="M396.955,103.578 L564.345,234.486 L611.558,513.469 L431.292,419.44 L396.955,103.578 Z" />
+            <path fill-rule="evenodd" fill="rgb(0, 0, 0)" d="M431.292,419.44 L611.558,513.469 L358.327,595.18 L156.600,522.53 L431.292,419.44 Z" />
+          </svg>
+          <a target="_blank" rel="noopener" href="https://github.com/hooozen/hexo-theme-tranquility">致远</a>&nbsp;驱动
+        </div>
+      </div>
+    </div>
+    
+      <script src="https://unpkg.com/js-polyfills@0.1.43/es6.js"></script>
+      <script id="MathJax-script"
+              async
+              src="https://www.unpkg.com/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    
+    
+      <script src="/js/search.js"></script>
+      <script>searchInitialize("/search.json")</script>
+    
+    
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+  const param = JSON.parse('{"enable":true,"owner":"Laicise","admin":["Laicise"],"repo":"Laicise.github.io","clientID":"Ov23liA4XXVSKAlHdu95","clientSecret":"cc9faf7a00291852aa82555634266b5434fb8cc0","distractionFreeMode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN"}')
+  let title = location.pathname.substr(0, 50); 
+  param.id = title
+  const gitalk = new Gitalk(param)
+  gitalk.render('gitalk-container')
+</script>
+
+  
+
+  </body>
+</html>

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf8" />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <title>
+      
+        《可转债实操详解（三）》实战买入指南 | 文客 | 菠菜
+      
+    </title>
+    <meta name="description" content="记录编程、投资与生活的杂谈随笔" />
+    <meta name="keywords" content="" />
+    
+      <link rel="apple-touch-icon"
+            sizes="180x180"
+            href="/images/logo.png" />
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/images/logo.png" />
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/images/logo.png" />
+    
+    
+      <link rel="mask-icon"
+            href="/images/logo.png"
+            color="" />
+    
+    
+    
+      
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/normal.ttf);
+        font-weight: normal;
+    }
+  </style>
+
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/bold.ttf);
+        font-weight: bold;
+    }
+  </style>
+
+
+    
+    <link rel="stylesheet"
+          type="text/css"
+          href='/css/layout.css' />
+    
+    
+  <link rel="stylesheet" type="text/css" href="/css/post.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"/>
+
+  <meta name="generator" content="Hexo 8.1.1"></head>
+  <body>
+    
+      <div id="search-mask" style="display:none">
+  <div class="search-main" id="search-main">
+    <div class="search__head">
+      <div class="search-form">
+        <svg t="1706347533072"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             version="1.1"
+             xmlns="http://www.w3.org/2000/svg"
+             p-id="7828"
+             width="20"
+             height="20">
+          <path d="M685.6 660.336l155.152 155.168a16 16 0 0 1 0 22.624l-11.312 11.328a16 16 0 0 1-22.624 0l-158.528-158.544a289.792 289.792 0 0 1-165.152 51.36C322.336 742.256 192 611.904 192 451.12 192 290.336 322.336 160 483.136 160c160.784 0 291.12 130.336 291.12 291.136 0 82.112-33.984 156.272-88.672 209.2z m-202.464 33.92c134.272 0 243.12-108.848 243.12-243.12C726.256 316.848 617.408 208 483.136 208 348.848 208 240 316.848 240 451.136c0 134.272 108.848 243.12 243.136 243.12z" fill="#000000" p-id="7829">
+          </path>
+        </svg>
+        <input id="search-input" placeholder="搜索文章">
+        <svg t="1706361500528"
+             id="search-clear"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             version="1.1"
+             xmlns="http://www.w3.org/2000/svg"
+             p-id="4351"
+             width="20"
+             height="20">
+          <path d="M512 562.688l-264.2944 264.2944-50.688-50.688L461.312 512 197.0176 247.7056l50.688-50.688L512 461.312l264.2944-264.2944 50.688 50.688L562.688 512l264.2944 264.2944-50.688 50.688L512 562.688z" fill="#00" p-id="4352">
+          </path>
+        </svg>
+      </div>
+    </div>
+    <div class="search__body" id="search-result"></div>
+    <div class="search__foot"></div>
+  </div>
+</div>
+
+    
+    <div class="head">
+      <div class="nav">
+        <a href='/' class="nav-logo">
+          <img alt="logo" height="60px" width="60px" src="/images/logo2.png" />
+        </a>
+        <input id="navBtn" type="checkbox" />
+        <div class="nav-right">
+          
+            <div class="search-outer">
+  <div class="search" id="search-btn">
+    <svg t="1706347533072"
+         class="icon"
+         viewBox="0 0 1024 1024"
+         version="1.1"
+         xmlns="http://www.w3.org/2000/svg"
+         p-id="7828"
+         width="20"
+         height="20">
+      <path d="M685.6 660.336l155.152 155.168a16 16 0 0 1 0 22.624l-11.312 11.328a16 16 0 0 1-22.624 0l-158.528-158.544a289.792 289.792 0 0 1-165.152 51.36C322.336 742.256 192 611.904 192 451.12 192 290.336 322.336 160 483.136 160c160.784 0 291.12 130.336 291.12 291.136 0 82.112-33.984 156.272-88.672 209.2z m-202.464 33.92c134.272 0 243.12-108.848 243.12-243.12C726.256 316.848 617.408 208 483.136 208 348.848 208 240 316.848 240 451.136c0 134.272 108.848 243.12 243.136 243.12z" fill="#000000" p-id="7829">
+      </path>
+    </svg>
+    <span>搜索</span>
+    <span class="search-shortcut-key">Ctrl K</span>
+  </div>
+</div>
+
+          
+          <div class="nav-menu">
+            
+              
+                <a class="nav-menu-item" href="/Coding">Coding</a>
+              
+                <a class="nav-menu-item" href="/Finance">Finance</a>
+              
+                <a class="nav-menu-item" href="/Life">Life</a>
+              
+            
+            
+          </div>
+        </div>
+        <label class="nav-btn" for="navBtn"></label>
+      </div>
+    </div>
+    <div class="body">
+      
+  <article class="post-content">
+    <div class="post-inner">
+      <div class="post-content__head">
+        <div class="post-title">《可转债实操详解（三）》实战买入指南</div>
+        <div class="post-info">
+          
+  
+
+
+          <span class="post-date">2026-03-15</span>
+        </div>
+      </div>
+      
+      <div class="post-content__body">
+        
+          <div class="post-gallery">
+            
+          </div>
+        
+        <blockquote>
+<p>整理：小汀<br>编辑：小莎<br>审核：小格<br>终审：菠菜哒哒</p>
+</blockquote>
+<hr>
+<p>之前两期，我们聊了可转债的基本概念和核心条款。有朋友问我：道理都懂了，可到底怎么买？</p>
+<p>今天直接上干货。</p>
+<hr>
+<h2 id="一、先看懂两个”保命符”"><a href="#一、先看懂两个”保命符”" class="headerlink" title="一、先看懂两个”保命符”"></a>一、先看懂两个”保命符”</h2><h3 id="回售条款：你的”退票权”"><a href="#回售条款：你的”退票权”" class="headerlink" title="回售条款：你的”退票权”"></a>回售条款：你的”退票权”</h3><p>最后两个计息年度，如果股价低于转股价的70%，你可以按100-103元把转债卖回给公司。</p>
+<p>听起来是不是有点像买了票以后实在不想看了，还能退票的感觉？</p>
+<p>这个条款是监管层硬性要求上市公司加的，本质上是保护投资者的”安全垫”。但要注意，这个权利在你手里，公司不能强迫你回售，你可以选择回售，也可以继续持有等反弹。</p>
+<h3 id="到期赎回价：别指望它"><a href="#到期赎回价：别指望它" class="headerlink" title="到期赎回价：别指望它"></a>到期赎回价：别指望它</h3><p>一般约110元。</p>
+<p>我直说吧，这个收益率跟存银行差不多。之所以建议尽量不持有到期，是因为：</p>
+<ol>
+<li>持有五六年只赚10%，资金效率太低了</li>
+<li>中间如果遇到牛市，你可以赚更多</li>
+<li>到期赎回是公司的权利不是义务，它完全可以提前强赎</li>
+</ol>
+<p>所以别指着到期那110块，踏踏实实学怎么在二级市场赚钱。</p>
+<hr>
+<h2 id="二、什么时候该入场？"><a href="#二、什么时候该入场？" class="headerlink" title="二、什么时候该入场？"></a>二、什么时候该入场？</h2><h3 id="看中证转债指数（00832）"><a href="#看中证转债指数（00832）" class="headerlink" title="看中证转债指数（00832）"></a>看中证转债指数（00832）</h3><p>这个指数代表市场上所有可转债的整体表现。</p>
+<ul>
+<li>熊市：低位布局，慢慢定投</li>
+<li>牛市：顺势持有，享受溢价</li>
+<li><strong>最怕横盘震荡</strong>：这时转债波动小，持有体验差，也赚不到什么钱</li>
+</ul>
+<p>我的经验是：熊市不恐惧，牛市不贪婪，横盘期管住手别乱动。</p>
+<hr>
+<h2 id="三、六种情况，坚决不买"><a href="#三、六种情况，坚决不买" class="headerlink" title="三、六种情况，坚决不买"></a>三、六种情况，坚决不买</h2><p>这六条是血泪教训总结出来的，照着做能避开大多数坑：</p>
+<p><strong>1. 未到转股期</strong></p>
+<p>转债上市后通常有6个月转股期，期间不能转股，流动性差，溢价率往往偏高。</p>
+<p><strong>2. 没有回售条款</strong></p>
+<p>回售是保护你的最后一道防线。没有回售条款的转债，一旦正股跌成狗，你连”退票”的机会都没有。</p>
+<p><strong>3. 转股规模太小</strong></p>
+<p>转股规模小于5000万的要小心。规模太小意味着这只转债本身可能有问题，而且容易被游资炒作，波动太大。</p>
+<p><strong>4. 正股溢价率太高</strong></p>
+<p>溢价率超过50%的，说明这只转债已经严重偏离正股价值，买进去大概率是接盘。</p>
+<p><strong>5. 正股质地太差</strong></p>
+<p>这只转债对应的公司基本面稀烂，业绩年年亏损，即使条款再好，也不值得买。买债本质上是买公司。</p>
+<p><strong>6. 到期时间长且股价低迷</strong></p>
+<p>到期时间超过4年、正股股价还在低位徘徊的，说明公司短期内没有动力拉股价，你耗不起。</p>
+<hr>
+<h2 id="四、四种实用的买入策略"><a href="#四、四种实用的买入策略" class="headerlink" title="四、四种实用的买入策略"></a>四、四种实用的买入策略</h2><h3 id="策略一：面值最高折扣法"><a href="#策略一：面值最高折扣法" class="headerlink" title="策略一：面值最高折扣法"></a>策略一：面值最高折扣法</h3><p>只在面值附近（100元以下）买入，越跌越加仓。</p>
+<p>原理很简单：面值以下是安全区间，向下空间有限，向上弹性充足。</p>
+<h3 id="策略二：三条安全线"><a href="#策略二：三条安全线" class="headerlink" title="策略二：三条安全线"></a>策略二：三条安全线</h3><ul>
+<li><strong>110元</strong>：基本到了合理区间，可以开始关注</li>
+<li><strong>回售价</strong>：这是公司答应的最低回收价，通常比面值高一点</li>
+<li><strong>面值100元</strong>：最后的防线</li>
+</ul>
+<p>我的用法是：跌到110元开始建仓，跌到回售价加仓，跌到100元重仓。</p>
+<h3 id="策略三：安全分析派"><a href="#策略三：安全分析派" class="headerlink" title="策略三：安全分析派"></a>策略三：安全分析派</h3><blockquote>
+<p>110元以下买，持有两年，超30%退出</p>
+</blockquote>
+<p>这个策略的核心是”有耐心”。两年时间足够穿越一个周期，30%的收益目标也合理。达到目标就卖，没达到就继续持有。</p>
+<h3 id="策略四：双低转债策略"><a href="#策略四：双低转债策略" class="headerlink" title="策略四：双低转债策略"></a>策略四：双低转债策略</h3><p>双低 &#x3D; 低价格 + 低溢价率</p>
+<p>具体筛选条件：</p>
+<ul>
+<li>价格110元以下</li>
+<li>溢价率20%以下</li>
+</ul>
+<p>这种转债”股性”和”债性”都不错，进可攻退可守。</p>
+<hr>
+<h2 id="五、实战中最重要的三句话"><a href="#五、实战中最重要的三句话" class="headerlink" title="五、实战中最重要的三句话"></a>五、实战中最重要的三句话</h2><p><strong>1. 不要相信鬼故事</strong></p>
+<p>每次大跌，市场上都会流传各种恐慌言论，什么”转债要违约了”、”公司要破产了”。我的经验是：大部分鬼故事都是吓唬人的，稳住别慌。</p>
+<p><strong>2. 安全第一，注意配置比例</strong></p>
+<p>别把所有钱都砸在转债上。单一转债不超过总仓位的10%，行业别太集中。留得青山在，才能等到牛市。</p>
+<p><strong>3. 坚守原则，不做短线</strong></p>
+<p>可转债T+0交易，很多人手痒想日内频繁操作。我的建议是：别做短线。短线考验的是技术和心态，而大多数人两者都没有。选定策略，长期执行，比什么都强。</p>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><table>
+<thead>
+<tr>
+<th>要点</th>
+<th>核心内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>回售条款</td>
+<td>最后两年，股价低于转股价70%时，可按100-103元回售</td>
+</tr>
+<tr>
+<td>到期赎回</td>
+<td>一般约110元，不建议持有到期</td>
+</tr>
+<tr>
+<td>投资时机</td>
+<td>关注中证转债指数，熊市布局，牛市持有</td>
+</tr>
+<tr>
+<td>六种不买</td>
+<td>未到转股期、无回售、规模小、溢价率高、质地差、时间长</td>
+</tr>
+<tr>
+<td>买入策略</td>
+<td>面值法、三条安全线、安全分析派、双低策略</td>
+</tr>
+</tbody></table>
+<hr>
+<p>特别提示：可转债投资有风险，入市需谨慎。本文内容仅供参考，不构成任何投资建议。</p>
+<hr>
+<p><em>本文由小汀整理，小莎编辑，小格审核，菠菜哒哒终审</em></p>
+<hr>
+<div style="text-align: center; margin-top: 40px; padding: 20px; background: #f5f5f5; border-radius: 8px;">
+  <p style="font-size: 18px; font-weight: bold; margin-bottom: 15px;">📚 本期书籍推荐</p>
+  <p style="margin-bottom: 15px;"><strong>《卓有成效的管理者》</strong> - 彼得·德鲁克</p>
+  <p style="margin-bottom: 15px;">德鲁克被誉为"现代管理学之父"，而这本书是他的代表作。德鲁克告诉我们：卓有成效不是天赋，而是可以学会的习惯。书中关于时间管理、用人所长、决策方法的论述，半个多世纪后依然极具启发性。无论你是管理者还是普通人，这本书都能帮助你更高效地工作和生活。</p>
+</div>
+
+<div style="text-align: center; margin-top: 40px; padding: 20px; background: #f5f5f5; border-radius: 8px;">
+  <p style="font-size: 18px; font-weight: bold; margin-bottom: 15px;">欢迎关注我的公众号</p>
+  <p style="margin-bottom: 15px;">扫码关注「如是观世」，获取更多精彩内容</p>
+  <img src="/images/qrcode.jpg" alt="公众号二维码" style="width: 200px; height: 200px;">
+</div>
+
+      </div>
+    </div>
+    
+      <script src='https://unpkg.com/mermaid@latest/dist/mermaid.min.js'></script>
+      <script>
+        if (window.mermaid) {
+          mermaid.initialize({"startOnload":true});
+        }
+      </script>
+    
+  </article>
+  <div class="post__foot">
+    
+      <div class="like-author">
+  <input type="checkbox" id="likeCode" />
+  <div class="author-face">
+    <img height="100px"
+         width="100px"
+         id="front-face"
+         alt="author face"
+         src="/images/author.jpg" />
+    <img height="100px"
+         width="100px"
+         id="back-face"
+         alt="like code"
+         src="/images/pay.png" />
+  </div>
+  <div class="like-text">“给作者倒杯卡布奇诺”</div>
+  <label for="likeCode" class="like-btn">
+    <svg viewBox="0 0 1024 1024"
+         width="20px"
+         style="margin-right: 10px"
+         height="20px">
+      <path d="M466.88 908.96L113.824 563.296a270.08 270.08 0 0 1 0-387.392c108.8-106.56 284.896-106.56 393.696 0 1.504 1.472 2.976 2.944 4.448 4.48 1.472-1.536 2.944-3.008 4.448-4.48 108.8-106.56 284.896-106.56 393.696 0a269.952 269.952 0 0 1 34.016 347.072l-387.392 385.6a64 64 0 0 1-89.92 0.384z" p-id="13650" fill="#ee4242" />
+    </svg>
+    喜欢作者
+  </label>
+</div>
+
+    
+    <div class="post-nav">
+  
+    <a class="post-nav-item-left" href="/2026/03/15/2026-03-15-%E5%8F%AF%E8%BD%AC%E5%80%BA%E5%AE%9E%E6%93%8D%E8%AF%A6%E8%A7%A3%E5%9B%9B/">
+      <div class="text-align">
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596" />
+        </svg>
+        <span class="text-small">上一篇</span>
+      </div>
+      <div>《可转债实操详解（四）》可转债打新全攻略</div>
+    </a>
+  
+  <div class="vhr"></div>
+  
+    <a class="post-nav-item-right" href="/2026/03/14/2026-03-14-%E7%94%9F%E6%B4%BB%E7%A2%8E%E7%A2%8E%E5%BF%B5-%E8%87%AA%E7%94%B1/">
+      <div class="text-align">
+        <span class="text-small">下一篇</span>
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             transform="scale(-1,-1)"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596" />
+        </svg>
+      </div>
+      生活碎碎念 - 自由
+    </a>
+  
+</div>
+
+    
+      <div class="related-post">
+  <div class="related__head">
+  
+
+</div>
+  <div class="realated__body">
+    
+      <div class="null"><div class="null-item"><div class="null-title"><a href="/2026/03/14/2026-03-14-生活碎碎念-自由/" title="生活碎碎念 - 自由" rel="bookmark">生活碎碎念 - 自由</a></div></div><div class="null-item"><div class="null-title"><a href="/2026/03/14/2026-03-14-OpenClaw安装部署全攻略/" title="OpenClaw 安装部署全攻略 - 最强 AI 助手本地运行指南" rel="bookmark">OpenClaw 安装部署全攻略 - 最强 AI 助手本地运行指南</a></div></div></div>
+    
+  </div>
+</div>
+
+    
+    
+      <div id="gitalk-container"></div>
+    
+  </div>
+
+    </div>
+    <div class="foot">
+      <div class="foot-inner">
+        <div class="foot__head">
+          
+            <div class="foot-line">
+              <div class="matts">海</div><div class="matts">内</div><div class="matts">存</div><div class="matts">知</div><div class="matts">己</div>
+            </div>
+          
+            <div class="foot-line">
+              <div class="matts">天</div><div class="matts">涯</div><div class="matts">若</div><div class="matts">比</div><div class="matts">邻</div>
+            </div>
+          
+        </div>
+        <div class="foot__body">
+          
+          
+            <div class="foot-item">
+              <div class="foot-item__head">账号</div>
+              <div class="foot-item__body">
+                
+                  <div class="text">
+                    <img alt="link" height="20px" width="20px" src="/images/logo-github.svg" />
+                    <a class="foot-link" target="_blank" rel="noopener" href="https://github.com/Laicise">Laicize</a>
+                  </div>
+                
+              </div>
+            </div>
+          
+          <div class="foot-item">
+            <div class="foot-item__head">联系</div>
+            <div class="foot-item__body">
+              <div class="text">
+                <img alt="link" height="20px" width="20px" src="/images/icon/icon-email.svg" />
+                <a class="foot-link" href="mailto:wenrenmoke12@gmail.com">wenrenmoke12@gmail.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <a href="https://laicise.github.io">文客 | 菠菜</a> &nbsp;|&nbsp;由&nbsp;<a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>&nbsp;及&nbsp;
+          <svg width="20" height="20" viewBox="0 0 725 725">
+            <path fill-rule="evenodd" fill="rgb(221, 221, 221)" d="M145.870,236.632 L396.955,103.578 L431.292,419.44 L156.600,522.53 L145.870,236.632 Z" />
+            <path fill-rule="evenodd" fill="rgb(159, 159, 159)" d="M396.955,103.578 L564.345,234.486 L611.558,513.469 L431.292,419.44 L396.955,103.578 Z" />
+            <path fill-rule="evenodd" fill="rgb(0, 0, 0)" d="M431.292,419.44 L611.558,513.469 L358.327,595.18 L156.600,522.53 L431.292,419.44 Z" />
+          </svg>
+          <a target="_blank" rel="noopener" href="https://github.com/hooozen/hexo-theme-tranquility">致远</a>&nbsp;驱动
+        </div>
+      </div>
+    </div>
+    
+      <script src="https://unpkg.com/js-polyfills@0.1.43/es6.js"></script>
+      <script id="MathJax-script"
+              async
+              src="https://www.unpkg.com/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    
+    
+      <script src="/js/search.js"></script>
+      <script>searchInitialize("/search.json")</script>
+    
+    
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+  const param = JSON.parse('{"enable":true,"owner":"Laicise","admin":["Laicise"],"repo":"Laicise.github.io","clientID":"Ov23liA4XXVSKAlHdu95","clientSecret":"cc9faf7a00291852aa82555634266b5434fb8cc0","distractionFreeMode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN"}')
+  let title = location.pathname.substr(0, 50); 
+  param.id = title
+  const gitalk = new Gitalk(param)
+  gitalk.render('gitalk-container')
+</script>
+
+  
+
+  </body>
+</html>

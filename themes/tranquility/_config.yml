@@ -1,6 +1,6 @@
-slogan: “宁静致远”
+slogan: “记录编程、投资与生活的杂谈随笔”
 email: wenrenmoke12@gmail.com
-logo: "/images/logo.png"
+logo: "/images/logo2.png"
 
 mathjax: true # 加载 LateX 数学公式库
 
@@ -30,19 +30,19 @@ subpage: # 开启“子页”功能，详见 README
       description:  菠菜's essay of everything # 描述
 
 index: # 配置首页个性化内容
-  motto: "长风破浪会有时！"
+  motto: "菠菜 | 文客"
   poem:
-    - 君不见高堂明镜悲白发
-    - 朝如青丝暮成雪
+    - 一蓑烟雨任平生
+    - 记录编程、投资与生活的杂谈随笔
   photo: /images/about.jpg
   about:
-    title: 关于
+    title: 我
     text:
-      - 酒入豪肠,七分酿成了月光
+      -   生于 20 世纪末，活在信息洪流中
       -
-      - 余下的三分啸成剑气
+      -      碳基生物，间歇性清醒
       -
-      - 绣口一吐就半个盛唐
+      - 试图用文字在数字废墟上留下一点痕迹
 
 foot:
   title:
@@ -68,19 +68,20 @@ social:
 
 reward: # 赞赏
   enable: true
-  face: /assets/author-face.jpg # 头像图片
-  paycode: /assets/pay-code.jpg # 支付码图片
+  face: /images/author.jpg # 头像图片
+  paycode: /images/pay.png # 支付码图片
   text: “给作者倒杯卡布奇诺”
   btnText: 喜欢作者
 
 # see https://github.com/gitalk/gitalk
 gitalk: # gitalk 评论
-  enable: false
-  owner: # MUST HAVE, Your Github Username
+  enable: true
+  owner: Laicise
   admin:
-  repo: # MUST HAVE, The name of the repo you use to store Gitment comments
-  clientID: # MUST HAVE, Github client id for the Gitment
-  clientSecret: # EITHER this or proxy_gateway, Github access secret token for the Gitment
+    - Laicise
+  repo: Laicise.github.io
+  clientID: Ov23liA4XXVSKAlHdu95
+  clientSecret: cc9faf7a00291852aa82555634266b5434fb8cc0
 
   distractionFreeMode: false # Facebook-like distraction free mode
   # When the official proxy is not available, you can change it to your own proxy address
@@ -129,11 +130,11 @@ timeline:
     - name: article
       color: "#ee936c"
       icon: /images/icon/icon-article.svg
-      checked: false
+      checked: true
     - name: app
       color: "#60a465"
       icon: /images/icon/icon-app.svg
-      checked: true
+      checked: false
     - name: event
       color: "#568dc4"
       icon: /images/icon/icon-event.svg
