@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf8" />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <title>
+      
+        Nuclei UX900FD RISC-V IP 裸机启动流程深度解析 | 文客 | 菠菜
+      
+    </title>
+    <meta name="description" content="记录编程、投资与生活的杂谈随笔" />
+    <meta name="keywords" content="" />
+    
+      <link rel="apple-touch-icon"
+            sizes="180x180"
+            href="/images/logo.png" />
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/images/logo.png" />
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/images/logo.png" />
+    
+    
+      <link rel="mask-icon"
+            href="/images/logo.png"
+            color="" />
+    
+    
+    
+      
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/normal.ttf);
+        font-weight: normal;
+    }
+  </style>
+
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/bold.ttf);
+        font-weight: bold;
+    }
+  </style>
+
+
+    
+    <link rel="stylesheet"
+          type="text/css"
+          href='/css/layout.css' />
+    
+    
+  <link rel="stylesheet" type="text/css" href="/css/post.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"/>
+
+  <meta name="generator" content="Hexo 8.1.1"></head>
+  <body>
+    
+      <div id="search-mask" style="display:none">
+  <div class="search-main" id="search-main">
+    <div class="search__head">
+      <div class="search-form">
+        <svg t="1706347533072"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             version="1.1"
+             xmlns="http://www.w3.org/2000/svg"
+             p-id="7828"
+             width="20"
+             height="20">
+          <path d="M685.6 660.336l155.152 155.168a16 16 0 0 1 0 22.624l-11.312 11.328a16 16 0 0 1-22.624 0l-158.528-158.544a289.792 289.792 0 0 1-165.152 51.36C322.336 742.256 192 611.904 192 451.12 192 290.336 322.336 160 483.136 160c160.784 0 291.12 130.336 291.12 291.136 0 82.112-33.984 156.272-88.672 209.2z m-202.464 33.92c134.272 0 243.12-108.848 243.12-243.12C726.256 316.848 617.408 208 483.136 208 348.848 208 240 316.848 240 451.136c0 134.272 108.848 243.12 243.136 243.12z" fill="#000000" p-id="7829">
+          </path>
+        </svg>
+        <input id="search-input" placeholder="搜索文章">
+        <svg t="1706361500528"
+             id="search-clear"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             version="1.1"
+             xmlns="http://www.w3.org/2000/svg"
+             p-id="4351"
+             width="20"
+             height="20">
+          <path d="M512 562.688l-264.2944 264.2944-50.688-50.688L461.312 512 197.0176 247.7056l50.688-50.688L512 461.312l264.2944-264.2944 50.688 50.688L562.688 512l264.2944 264.2944-50.688 50.688L512 562.688z" fill="#00" p-id="4352">
+          </path>
+        </svg>
+      </div>
+    </div>
+    <div class="search__body" id="search-result"></div>
+    <div class="search__foot"></div>
+  </div>
+</div>
+
+    
+    <div class="head">
+      <div class="nav">
+        <a href='/' class="nav-logo">
+          <img alt="logo" height="60px" width="60px" src="/images/logo2.png" />
+        </a>
+        <input id="navBtn" type="checkbox" />
+        <div class="nav-right">
+          
+            <div class="search-outer">
+  <div class="search" id="search-btn">
+    <svg t="1706347533072"
+         class="icon"
+         viewBox="0 0 1024 1024"
+         version="1.1"
+         xmlns="http://www.w3.org/2000/svg"
+         p-id="7828"
+         width="20"
+         height="20">
+      <path d="M685.6 660.336l155.152 155.168a16 16 0 0 1 0 22.624l-11.312 11.328a16 16 0 0 1-22.624 0l-158.528-158.544a289.792 289.792 0 0 1-165.152 51.36C322.336 742.256 192 611.904 192 451.12 192 290.336 322.336 160 483.136 160c160.784 0 291.12 130.336 291.12 291.136 0 82.112-33.984 156.272-88.672 209.2z m-202.464 33.92c134.272 0 243.12-108.848 243.12-243.12C726.256 316.848 617.408 208 483.136 208 348.848 208 240 316.848 240 451.136c0 134.272 108.848 243.12 243.136 243.12z" fill="#000000" p-id="7829">
+      </path>
+    </svg>
+    <span>搜索</span>
+    <span class="search-shortcut-key">Ctrl K</span>
+  </div>
+</div>
+
+          
+          <div class="nav-menu">
+            
+              
+                <a class="nav-menu-item" href="/Coding">Coding</a>
+              
+                <a class="nav-menu-item" href="/Finance">Finance</a>
+              
+                <a class="nav-menu-item" href="/Life">Life</a>
+              
+            
+            
+          </div>
+        </div>
+        <label class="nav-btn" for="navBtn"></label>
+      </div>
+    </div>
+    <div class="body">
+      
+  <article class="post-content">
+    <div class="post-inner">
+      <div class="post-content__head">
+        <div class="post-title">Nuclei UX900FD RISC-V IP 裸机启动流程深度解析</div>
+        <div class="post-info">
+          
+  <a href="/tags/RISC-V/" class="post-tag">#RISC-V</a><a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="post-tag">#嵌入式</a><a href="/tags/%E8%A3%B8%E6%9C%BA%E7%BC%96%E7%A8%8B/" class="post-tag">#裸机编程</a><a href="/tags/Nuclei/" class="post-tag">#Nuclei</a><a href="/tags/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/" class="post-tag">#启动流程</a><a href="/tags/CPU%E6%9E%B6%E6%9E%84/" class="post-tag">#CPU架构</a>
+
+
+          <span class="post-date">2026-08-05</span>
+        </div>
+      </div>
+      
+      <div class="post-content__body">
+        
+          <div class="post-gallery">
+            
+          </div>
+        
+        <h1 id="Nuclei-UX900FD-RISC-V-IP-裸机启动流程"><a href="#Nuclei-UX900FD-RISC-V-IP-裸机启动流程" class="headerlink" title="Nuclei UX900FD RISC-V IP 裸机启动流程"></a>Nuclei UX900FD RISC-V IP 裸机启动流程</h1><blockquote>
+<p>最近公司在调研芯来IP，借此机会，分析一下RISC-V的裸机启动流程</p>
+<p>基于 Nuclei SDK + evalsoc 平台 + ILM 下载模式，从复位到 main() 流程分析</p>
+</blockquote>
+<h1 id="1-概述：启动流程全景图"><a href="#1-概述：启动流程全景图" class="headerlink" title="1. 概述：启动流程全景图"></a>1. 概述：启动流程全景图</h1><p>上电&#x2F;复位后，CPU 从 <code>_start</code> 到 <code>main()</code> 的完整流程：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">上电/复位</span><br><span class="line">    │</span><br><span class="line">    ▼</span><br><span class="line">┌──────────────────────────────────────────────────┐</span><br><span class="line">│ _start（汇编，复位向量）                          │</span><br><span class="line">│  ├─ Stage 1: 关中断、核识别、GP/TP/栈初始化       │</span><br><span class="line">│  ├─ Stage 2: 使能 FPU、Vector、Cache、计数器      │</span><br><span class="line">│  └─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─    │</span><br><span class="line">│     __init_common（汇编）                         │</span><br><span class="line">│     ├─ 搬 .text 段                                │</span><br><span class="line">│     ├─ 搬 .data 段                                │</span><br><span class="line">│     └─ 清 .bss 段                                 │</span><br><span class="line">│  └─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─    │</span><br><span class="line">│ _start_premain（汇编→C 的过渡）                   │</span><br><span class="line">│  ├─ call SystemInit()          ← 芯片级初始化     │</span><br><span class="line">│  └─ call __libc_init_array()   ← C++全局构造      │</span><br><span class="line">│  └─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─    │</span><br><span class="line">│ __skip_init（汇编）                               │</span><br><span class="line">│  ├─ call __sync_harts()         ← 多核同步        │</span><br><span class="line">│  ├─ call _premain_init()        ← 板级全面初始化  │</span><br><span class="line">│  ├─ 使能 BPU                                     │</span><br><span class="line">│  └─ call main()                 ← 用户代码入口    │</span><br><span class="line">│  └─ call _postmain_fini()       ← 仿真退出        │</span><br><span class="line">└──────────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="2-内存布局：ILM-链接脚本分析"><a href="#2-内存布局：ILM-链接脚本分析" class="headerlink" title="2. 内存布局：ILM 链接脚本分析"></a>2. 内存布局：ILM 链接脚本分析</h1><h3 id="2-1-物理内存映射"><a href="#2-1-物理内存映射" class="headerlink" title="2.1 物理内存映射"></a>2.1 物理内存映射</h3><p>来自 <code>evalsoc.memory</code>：</p>
+<table>
+<thead>
+<tr>
+<th>区域</th>
+<th>基址</th>
+<th>大小</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>FLASH</strong></td>
+<td><code>0x20000000</code></td>
+<td>8 MB</td>
+<td>非易失存储，存放烧录镜像</td>
+</tr>
+<tr>
+<td><strong>ILM</strong></td>
+<td><code>0x80000000</code></td>
+<td>64 KB</td>
+<td>Instruction Local Memory——指令紧耦合存储器</td>
+</tr>
+<tr>
+<td><strong>DLM</strong></td>
+<td><code>0x90000000</code></td>
+<td>64 KB</td>
+<td>Data Local Memory——数据紧耦合存储器</td>
+</tr>
+<tr>
+<td><strong>SRAM&#x2F;DDR</strong></td>
+<td><code>0xA0000000</code></td>
+<td>128 KB &#x2F; 256 MB</td>
+<td>外部 RAM，视配置选择</td>
+</tr>
+</tbody></table>
+<p><strong>ILM 和 DLM 是 Nuclei 核内部的紧耦合存储器</strong>，通过专用总线直连 CPU，访问延迟远低于外部 DDR&#x2F;SRAM，且与 I-Cache&#x2F;D-Cache 独立——这是实现<strong>确定实时性</strong>的关键硬件机制。</p>
+<h3 id="2-2-链接脚本-ILM-模式的内存分区"><a href="#2-2-链接脚本-ILM-模式的内存分区" class="headerlink" title="2.2 链接脚本 ILM 模式的内存分区"></a>2.2 链接脚本 ILM 模式的内存分区</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/* gcc_evalsoc_ilm.ld */</span><br><span class="line">MEMORY</span><br><span class="line">&#123;</span><br><span class="line">  ilm (rxa!w) : ORIGIN = 0x80000000, LENGTH = 64K   /* 只读+执行 */</span><br><span class="line">  ram (wxa!r) : ORIGIN = 0x90000000, LENGTH = 64K   /* 读写+执行 */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>链接器区域</th>
+<th>物理对应</th>
+<th>权限</th>
+<th>存放内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>ROM 别名 &#x3D; ILM</strong></td>
+<td>ILM (0x80000000)</td>
+<td>R+X</td>
+<td><code>.init</code>（向量表+启动代码）、<code>.text</code>（程序代码）、<code>.riscv.jvt</code>（Zcmt 跳转表）</td>
+</tr>
+<tr>
+<td><strong>RAM 别名 &#x3D; DLM</strong></td>
+<td>DLM (0x90000000)</td>
+<td>R+W+X</td>
+<td><code>.data</code>（初始化数据+只读常数）、<code>.tdata</code>（TLS 数据）、<code>.tbss</code>&#x2F;<code>.bss</code>（未初始化数据）、<code>.heap</code>、<code>.stack</code></td>
+</tr>
+</tbody></table>
+<h3 id="2-3-关键符号定义"><a href="#2-3-关键符号定义" class="headerlink" title="2.3 关键符号定义"></a>2.3 关键符号定义</h3><p>链接脚本定义了一系列符号，这些符号在启动汇编中被直接引用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">/* .text 段符号——用于代码搬运和 GP 初始化 */</span><br><span class="line">PROVIDE( _text_lma = LOADADDR(.text) );   /* .text 在加载映像中的地址 */</span><br><span class="line">PROVIDE( _text = ADDR(.text) );            /* .text 在运行时的地址（ILM 中） */</span><br><span class="line">PROVIDE( _etext = . );                     /* .text 结束地址 */</span><br><span class="line"></span><br><span class="line">/* .data 段符号——用于数据搬运 */</span><br><span class="line">PROVIDE( _data_lma = LOADADDR(.data) );   /* .data 在加载映像中的地址 */</span><br><span class="line">PROVIDE( _data = ADDR(.data) );            /* .data 在运行时的地址（DLM 中） */</span><br><span class="line">PROVIDE( _edata = . );                     /* .data 结束地址 */</span><br><span class="line"></span><br><span class="line">/* .bss 段符号——用于清零 */</span><br><span class="line">PROVIDE( __bss_start = . );               /* .bss 起始地址 */</span><br><span class="line">PROVIDE( _end = . );                       /* .bss 结束地址 */</span><br><span class="line"></span><br><span class="line">/* GP/TLS/栈/堆符号 */</span><br><span class="line">PROVIDE( __global_pointer$ = . + 0x800 );  /* GP 位于 .sdata 开头后 2KB 处 */</span><br><span class="line">PROVIDE( __tls_base = . );                /* TLS 基址 */</span><br><span class="line">PROVIDE( _sp = . );                       /* 初始栈指针（DLM 顶部） */</span><br><span class="line">PROVIDE( __heap_start = . );              /* 堆起始 */</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>__global_pointer$</code> 被放置在 <code>.sdata</code>（短数据段）起始位置偏移 <code>0x800</code> 处，这使得编译器能以 <code>gp ± 2KB</code> 范围覆盖整个 <code>.sdata</code> + <code>.sbss</code> 区域。</p>
+</blockquote>
+<h3 id="2-4-ILM-下载模式-vs-其他模式"><a href="#2-4-ILM-下载模式-vs-其他模式" class="headerlink" title="2.4 ILM 下载模式 vs 其他模式"></a>2.4 ILM 下载模式 vs 其他模式</h3><table>
+<thead>
+<tr>
+<th>模式</th>
+<th>.text 加载地址(LMA)</th>
+<th>.text 运行地址(VMA)</th>
+<th>是否需要搬运</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>ILM</strong></td>
+<td>ILM (0x80000000)</td>
+<td>ILM (0x80000000)</td>
+<td><strong>不需要</strong>（LMA &#x3D; VMA）</td>
+</tr>
+<tr>
+<td>DDR</td>
+<td>DDR (0xA0000000)</td>
+<td>DDR (0xA0000000)</td>
+<td>不需要</td>
+</tr>
+<tr>
+<td>Flash</td>
+<td>Flash (0x20000000)</td>
+<td>ILM (0x80000000)</td>
+<td><strong>需要</strong>——启动时从 Flash 拷贝到 ILM</td>
+</tr>
+<tr>
+<td>FlashXIP</td>
+<td>Flash (0x20000000)</td>
+<td>Flash (0x20000000)</td>
+<td>不需要（直接就地执行）</td>
+</tr>
+<tr>
+<td>SRAM</td>
+<td>SRAM (0xA0000000)</td>
+<td>SRAM (0xA0000000)</td>
+<td>不需要</td>
+</tr>
+</tbody></table>
+<p>ILM 模式：<strong>烧录器直接将可执行文件下载到 ILM 和 DLM 中</strong>，<code>__init_common</code> 检测到 <code>_text_lma == _text</code>，就会跳过 .text 搬运步骤。但 .data 段仍然需要从加载地址搬运到运行地址（DLM）。</p>
+<hr>
+<h1 id="3-Stage-1：复位向量-start——CPU-的第一条指令"><a href="#3-Stage-1：复位向量-start——CPU-的第一条指令" class="headerlink" title="3. Stage 1：复位向量 _start——CPU 的第一条指令"></a>3. Stage 1：复位向量 _start——CPU 的第一条指令</h1><h3 id="3-1-入口点"><a href="#3-1-入口点" class="headerlink" title="3.1 入口点"></a>3.1 入口点</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.section .text.init          /* 放入 .init 段——链接脚本中排在第一 */</span><br><span class="line">.globl _start</span><br><span class="line">.type _start, @function</span><br><span class="line"></span><br><span class="line">_start:</span><br></pre></td></tr></table></figure>
+
+<p>链接脚本通过 <code>ENTRY(_start)</code> 指定入口点，<strong>CPU 复位后第一条指令就是 <code>_start</code> 的第一条汇编指令</strong>。</p>
+<h3 id="3-2-关中断"><a href="#3-2-关中断" class="headerlink" title="3.2 关中断"></a>3.2 关中断</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">csrc CSR_MSTATUS, MSTATUS_MIE    /* 清零 mstatus.MIE 位，全局关中断 */</span><br></pre></td></tr></table></figure>
+
+<p>RISC-V 的 <code>mstatus.MIE</code>（Machine Interrupt Enable，bit 3）是机器模式中断总开关。启动阶段中断系统尚未初始化，任何中断到达都会导致不可预测行为。</p>
+<h3 id="3-3-启动核（Boot-Hart）选择"><a href="#3-3-启动核（Boot-Hart）选择" class="headerlink" title="3.3 启动核（Boot Hart）选择"></a>3.3 启动核（Boot Hart）选择</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#ifndef SMP_CPU_CNT                /* 单核模式下进入此分支 */</span><br><span class="line">    csrr a0, CSR_MHARTID           /* 读当前核的 HartID */</span><br><span class="line">    andi a0, a0, 0xFF              /* 取低 8 位（集群内核编号） */</span><br><span class="line">    li a1, BOOT_HARTID             /* 默认 BOOT_HARTID = 0 */</span><br><span class="line">    bne a0, a1, __amp_wait         /* 非启动核 → 跳转到 WFI 死循环 */</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+
+<p>在多核（SMP）SoC 中，所有核同时从 <code>_start</code> 开始执行。但只需<strong>一个核</strong>（通常为 Hart 0）负责初始化——其他核应立即进入低功耗等待状态：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">__amp_wait:</span><br><span class="line">    wfi                              /* Wait For Interrupt——进入低功耗暂停 */</span><br><span class="line">    j __amp_wait                     /* 被唤醒后继续等待（不死不休） */</span><br></pre></td></tr></table></figure>
+
+<p>从核被 <code>__amp_wait</code> 卡住，直到主核完成初始化后在 <code>__sync_harts()</code> 中通过写 MSIP 寄存器唤醒它们。</p>
+<h3 id="3-4-初始化-GP、TP-和-Zcmt-跳转表"><a href="#3-4-初始化-GP、TP-和-Zcmt-跳转表" class="headerlink" title="3.4 初始化 GP、TP 和 Zcmt 跳转表"></a>3.4 初始化 GP、TP 和 Zcmt 跳转表</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.option push</span><br><span class="line">.option norelax</span><br><span class="line">la gp, __global_pointer$            /* 初始化全局指针寄存器 x3 */</span><br><span class="line">la tp, __tls_base                   /* 初始化线程指针寄存器 x4 */</span><br><span class="line">#if defined(__riscv_zcmt)</span><br><span class="line">    la t0, __jvt_base$</span><br><span class="line">    csrw CSR_JVT, t0                /* 设置 Zcmt 跳转向量表 CSR */</span><br><span class="line">#endif</span><br><span class="line">.option pop</span><br></pre></td></tr></table></figure>
+
+<p><strong>GP（Global Pointer，x3）</strong></p>
+<p><code>__global_pointer$</code> 位于 <code>.sdata</code> 段中间偏移 <code>0x800</code> 处。对在 <code>gp ± 2KB</code> 范围内的变量，编译器生成单条 <code>ld rd, offset(gp)</code> 指令代替常规的 <code>lui + addi + ld</code> 三指令序列。这是一种<strong>代码尺寸 + 性能的双重优化</strong>，在嵌入式领域非常关键。</p>
+<p>对比：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">; 普通寻址（2条指令 + 1条访存）</span><br><span class="line">lui  t0, %hi(system_clock)     ; 加载高 20 位</span><br><span class="line">lw   a0, %lo(system_clock)(t0) ; 加上低 12 位后读取</span><br><span class="line"></span><br><span class="line">; GP-relative 寻址（1条访存指令）</span><br><span class="line">lw   a0, %gp_rel(system_clock)(gp)</span><br></pre></td></tr></table></figure>
+
+<p><code>.option norelax</code> 防止汇编器将 <code>la</code> 伪指令优化为 GP-relative 形式——因为此时 GP 本身尚未初始化，必须先做绝对加载。</p>
+<p><strong>TP（Thread Pointer，x4）</strong></p>
+<p><code>__tls_base</code> 指向 TLS（Thread Local Storage）段基址。TLS 用于支持 RTOS 下的线程私有变量（如 <code>errno</code>）。在裸机单任务场景下 TP 虽暂时不用，但初始化它保证进入 RTOS 后上下文切换机制正确——这是一种<strong>前瞻性设计</strong>。</p>
+<p><strong>Zcmt（Compressed Jump Table for Multi-call）</strong></p>
+<p>Zcmt 是 RISC-V Zc* 代码密度扩展族的一员。它引入 <code>cm.jt</code> &#x2F; <code>cm.jalt</code> 两条 16 位指令，通过查询 <code>CSR_JVT</code> 指向的跳转表完成间接函数调用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">; 无 Zcmt：间接调用需要 ~4 字节（c.jalr）或 8 字节（jalr）</span><br><span class="line">jalr ra, t0, 0</span><br><span class="line"></span><br><span class="line">; 有 Zcmt：1 条 16 位指令</span><br><span class="line">cm.jalt 5  ; 调用跳转表中第 5 号函数</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-5-初始化栈指针"><a href="#3-5-初始化栈指针" class="headerlink" title="3.5 初始化栈指针"></a>3.5 初始化栈指针</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/* 单核：直接设置 sp = _sp */</span><br><span class="line">la sp, _sp</span><br><span class="line"></span><br><span class="line">/* 多核：为每个核分配独立的栈区间（每个核 __STACK_SIZE 字节） */</span><br><span class="line">#if defined(SMP_CPU_CNT) &amp;&amp; (SMP_CPU_CNT &gt; 1)</span><br><span class="line">    lui t0, %hi(__STACK_SIZE)</span><br><span class="line">    addi t0, t0, %lo(__STACK_SIZE) /* t0 = 每个核的栈大小（2KB） */</span><br><span class="line">    la sp, _sp                      /* sp = 栈顶 */</span><br><span class="line">    csrr a0, CSR_MHARTID</span><br><span class="line">    andi a0, a0, 0xFF</span><br><span class="line">    li a1, 0</span><br><span class="line">1:  beq a0, a1, 2f                 /* 找到自己的核编号→退出 */</span><br><span class="line">    sub sp, sp, t0                 /* sp 下移一个栈区间 */</span><br><span class="line">    addi a1, a1, 1</span><br><span class="line">    j 1b</span><br><span class="line">2:</span><br></pre></td></tr></table></figure>
+
+<p><code>_sp</code> 在链接脚本中被定义为 DLM 顶部地址。</p>
+<h3 id="3-6-配置-NMI-共享与-Zc-硬件使能"><a href="#3-6-配置-NMI-共享与-Zc-硬件使能" class="headerlink" title="3.6 配置 NMI 共享与 Zc 硬件使能"></a>3.6 配置 NMI 共享与 Zc 硬件使能</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/* 配置 NMI 基址与 mtvec 共享 */</span><br><span class="line">li t0, MMISC_CTL_NMI_CAUSE_FFF     /* bit 9 */</span><br><span class="line">csrs CSR_MMISC_CTL, t0</span><br><span class="line"></span><br><span class="line">/* 使能或禁用 Zc 硬件 */</span><br><span class="line">li t0, MMISC_CTL_ZC</span><br><span class="line">#if defined(__riscv_zcmp) || defined(__riscv_zcmt)</span><br><span class="line">    csrs CSR_MMISC_CTL, t0         /* 有 Zc 指令→打开硬件 */</span><br><span class="line">#else</span><br><span class="line">    csrc CSR_MMISC_CTL, t0         /* 无 Zc 指令→关掉省电 */</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+
+<p><code>CSR_MMISC_CTL</code> 是 Nuclei 自定义的机器模式杂项控制寄存器。NMI 共享设计让 <code>mnvec</code> 与 <code>mtvec</code> 共享同一入口值，启动阶段不需要维护两套入口。后续 <code>_premain_init()</code> 中的 <code>Exception_Init()</code> 会重新设置完整的异常处理体系。</p>
+<h3 id="3-7-设置早期异常入口"><a href="#3-7-设置早期异常入口" class="headerlink" title="3.7 设置早期异常入口"></a>3.7 设置早期异常入口</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">la t0, early_exc_entry</span><br><span class="line">csrw CSR_MTVEC, t0</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.align 6</span><br><span class="line">.global early_exc_entry</span><br><span class="line">early_exc_entry:</span><br><span class="line">    wfi</span><br><span class="line">    j early_exc_entry</span><br></pre></td></tr></table></figure>
+
+<p><code>early_exc_entry</code> 是一个<strong>占位异常处理器</strong>——任何启动阶段的异常都会导致 CPU 进入 WFI 暂停 + 自旋死循环。正常启动过程不应触发任何异常，如果停在这里说明有严重的早期初始化错误（如 FPU 未使能就执行浮点指令）。</p>
+<hr>
+<h1 id="4-Stage-2：FPU、Vector、Cache-与计数器使能"><a href="#4-Stage-2：FPU、Vector、Cache-与计数器使能" class="headerlink" title="4. Stage 2：FPU、Vector、Cache 与计数器使能"></a>4. Stage 2：FPU、Vector、Cache 与计数器使能</h1><h3 id="4-1-使能浮点单元（FPU）"><a href="#4-1-使能浮点单元（FPU）" class="headerlink" title="4.1 使能浮点单元（FPU）"></a>4.1 使能浮点单元（FPU）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#if defined(__riscv_flen) &amp;&amp; __riscv_flen &gt; 0</span><br><span class="line">    li t0, MSTATUS_FS              /* FS 域掩码：mstatus bits[14:13] */</span><br><span class="line">    csrc mstatus, t0               /* FS 清零 → Off */</span><br><span class="line">    li t0, MSTATUS_FS_INITIAL      /* FS = 0b01 → Initial */</span><br><span class="line">    csrs mstatus, t0</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+
+<p>RISC-V <code>mstatus.FS</code> 域控制浮点单元的状态，有四种取值：</p>
+<table>
+<thead>
+<tr>
+<th>FS 值</th>
+<th>名称</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>0b00</code></td>
+<td><strong>Off</strong></td>
+<td>FPU 关闭——执行浮点指令触发非法指令异常</td>
+</tr>
+<tr>
+<td><code>0b01</code></td>
+<td><strong>Initial</strong></td>
+<td>FPU 使能，但寄存器内容为初始值（未被修改）</td>
+</tr>
+<tr>
+<td><code>0b10</code></td>
+<td><strong>Clean</strong></td>
+<td>使能，寄存器内容与内存保存副本一致</td>
+</tr>
+<tr>
+<td><code>0b11</code></td>
+<td><strong>Dirty</strong></td>
+<td>使能，且寄存器已被修改</td>
+</tr>
+</tbody></table>
+<p><strong>先清后设</strong>的安全序列确保无论复位值是什么，FS 最终精确等于 <code>0b01</code>（Initial）。使用 Initial 而非 Dirty 有一个关键优势：<strong>在 RTOS 上下文切换时，处于 Initial 状态的线程不需要保存&#x2F;恢复 32 个浮点寄存器</strong>（256 字节），减少了切换开销。</p>
+<h3 id="4-2-使能向量扩展（V-扩展）"><a href="#4-2-使能向量扩展（V-扩展）" class="headerlink" title="4.2 使能向量扩展（V 扩展）"></a>4.2 使能向量扩展（V 扩展）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#if defined(__riscv_vector)</span><br><span class="line">    li t0, MSTATUS_VS              /* VS 域掩码：mstatus bits[16:15] */</span><br><span class="line">    csrc mstatus, t0               /* VS 清零 */</span><br><span class="line">    li t0, MSTATUS_VS_INITIAL      /* VS = 0b01 */</span><br><span class="line">    csrs mstatus, t0</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+
+<p>完全对称于 FPU 使能逻辑，控制的是向量单元。</p>
+<h3 id="4-3-使能-I-D-Cache"><a href="#4-3-使能-I-D-Cache" class="headerlink" title="4.3 使能 I&#x2F;D Cache"></a>4.3 使能 I&#x2F;D Cache</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#ifdef CFG_HAS_ICACHE</span><br><span class="line">    csrsi CSR_MCACHE_CTL, MCACHE_CTL_IC_EN    /* 使能 I-Cache */</span><br><span class="line">#endif</span><br><span class="line">#ifdef CFG_HAS_DCACHE</span><br><span class="line">    li t0, MCACHE_CTL_DC_EN</span><br><span class="line">    csrs CSR_MCACHE_CTL, t0                   /* 使能 D-Cache */</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+
+<p>Cache 使能通过 Nuclei 自定义 CSR <code>CSR_MCACHE_CTL</code> 控制。Stage 2 的 Cache 使能是<strong>早期粗粒度使能</strong>，仅限单核模式。SMP 模式下的 Cache 使能被推迟到 <code>_premain_init()</code> 中。</p>
+<h3 id="4-4-启用性能计数器"><a href="#4-4-启用性能计数器" class="headerlink" title="4.4 启用性能计数器"></a>4.4 启用性能计数器</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">csrci CSR_MCOUNTINHIBIT, 0x5      /* 清除 MHPM_CTL bit 0 和 bit 2 */</span><br></pre></td></tr></table></figure>
+
+<p>清零 bit 0 使能 cycle 计数，清零 bit 2 使能指令计数——这是后续 <code>get_cpu_freq()</code> 测量 CPU 频率的基础。</p>
+<hr>
+<h1 id="5-Stage-3：-init-common——搬-text、搬-data、清-bss"><a href="#5-Stage-3：-init-common——搬-text、搬-data、清-bss" class="headerlink" title="5. Stage 3：__init_common——搬 .text、搬 .data、清 .bss"></a>5. Stage 3：__init_common——搬 .text、搬 .data、清 .bss</h1><p>这个函数做的是<strong>所有 C 程序运行前最基本的内存初始化</strong>。它不是通过 <code>call</code> 调用的，而是 <code>_start</code> 执行完毕后通过<strong>代码顺序执行</strong>自然落入的（<code>_start</code> 和 <code>__init_common</code> 处于同一个 <code>.text.init</code> 段中）。</p>
+<h3 id="搬-text（代码段）"><a href="#搬-text（代码段）" class="headerlink" title="搬 .text（代码段）"></a>搬 .text（代码段）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">__init_common:</span><br><span class="line">    /* ===== Step 1: 搬 .text（代码段） ===== */</span><br><span class="line">    la a0, _text_lma              /* a0 = LMA（加载地址） */</span><br><span class="line">    la a1, _text                  /* a1 = VMA（运行地址） */</span><br><span class="line">    beq a0, a1, 2f               /* LMA == VMA → 不需要搬运 */</span><br><span class="line">    la a2, _etext                 /* a2 = 结束地址 */</span><br><span class="line">    bgeu a1, a2, 2f              /* 长度为零 → 跳过 */</span><br><span class="line">1:  lw t0, (a0)                  /* 从 LMA 读 4 字节 */</span><br><span class="line">    sw t0, (a1)                  /* 写入 VMA */</span><br><span class="line">    addi a0, a0, 4</span><br><span class="line">    addi a1, a1, 4</span><br><span class="line">    bltu a1, a2, 1b</span><br><span class="line">    fence.i                       /* 指令屏障：刷 I-Cache */</span><br></pre></td></tr></table></figure>
+
+<p>RISC-V 的 I-Cache 和 D-Cache 是分离的。<code>sw</code> 指令通过<strong>数据通路</strong>写入了内存，但 CPU 的取指单元可能仍然在 I-Cache 中缓存了旧数据。<code>fence.i</code> 保证：所有之前的数据写入对指令取指可见，且 I-Cache 被刷新。</p>
+<blockquote>
+<p>不执行 <code>fence.i</code> 的后果：CPU 可能从旧地址取指，执行到垃圾代码。</p>
+</blockquote>
+<p>使用 4 字节传输而非 8 字节，是为了<strong>同时兼容 RV32 和 RV64</strong>——当 <code>__riscv_xlen == 32</code> 时，<code>ld</code>&#x2F;<code>sd</code> 指令非法。</p>
+<h3 id="搬-data（已初始化数据段）"><a href="#搬-data（已初始化数据段）" class="headerlink" title="搬 .data（已初始化数据段）"></a>搬 .data（已初始化数据段）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/* ===== Step 2: 搬 .data（已初始化数据段） ===== */</span><br><span class="line">2:  la a0, _data_lma</span><br><span class="line">    la a1, _data</span><br><span class="line">    beq a0, a1, 2f</span><br><span class="line">    la a2, _edata</span><br><span class="line">    bgeu a1, a2, 2f</span><br><span class="line">1:  lw t0, (a0)</span><br><span class="line">    sw t0, (a1)</span><br><span class="line">    addi a0, a0, 4</span><br><span class="line">    addi a1, a1, 4</span><br><span class="line">    bltu a1, a2, 1b</span><br></pre></td></tr></table></figure>
+
+<p>搬运 .data 段是因为 C 语言要求在 <code>main()</code> 之前所有<strong>已初始化全局变量的值必须可用</strong>。在嵌入式系统中，这些初始值存储在非易失介质（Flash）中，变量本身位于可写 RAM 中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Flash 0x20000000:  [代码][.data 初始值: x=42, y=100, ...]</span><br><span class="line">                        │</span><br><span class="line">                   __init_common 搬运</span><br><span class="line">                        ▼</span><br><span class="line">DLM  0x90000000:  [.data: x=42, y=100, ...]</span><br></pre></td></tr></table></figure>
+
+<h3 id="清-bss（未初始化数据段）"><a href="#清-bss（未初始化数据段）" class="headerlink" title="清 .bss（未初始化数据段）"></a>清 .bss（未初始化数据段）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/* ===== Step 3: 清 .bss（未初始化数据段） ===== */</span><br><span class="line">2:  la a0, __bss_start</span><br><span class="line">    la a1, _end</span><br><span class="line">    bgeu a0, a1, 2f</span><br><span class="line">1:  sw zero, (a0)</span><br><span class="line">    addi a0, a0, 4</span><br><span class="line">    bltu a0, a1, 1b</span><br><span class="line">2:</span><br></pre></td></tr></table></figure>
+
+<p>C 标准要求所有未显式初始化的全局变量在 <code>main()</code> 前被清零。</p>
+<h3 id="内存操作全景"><a href="#内存操作全景" class="headerlink" title="内存操作全景"></a>内存操作全景</h3><p>以 ILM 下载模式为例，三个阶段完成后的内存状态：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">ILM (0x80000000):</span><br><span class="line">  [.vtable]  ← 中断向量表</span><br><span class="line">  [.text.init] ← _start, __init_common</span><br><span class="line">  [.text]    ← 所有程序代码</span><br><span class="line">  [.riscv.jvt] ← Zcmt 跳转表</span><br><span class="line"></span><br><span class="line">DLM (0x90000000):</span><br><span class="line">  [.data]    ← 初始化的全局变量 (从 LMA 搬运来)</span><br><span class="line">  [.sdata]   ← 短数据全局变量</span><br><span class="line">  [.rodata]  ← 只读常量 (被放置在 RAM 中以加速访问)</span><br><span class="line">  [.tdata]   ← TLS 初始数据</span><br><span class="line">  [.tbss/.bss] ← 清零后的未初始化变量</span><br><span class="line">  [.heap]    ← 堆空间 (至少 2KB)</span><br><span class="line">  [.stack]   ← 栈空间 (至少 2KB)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="6-Stage-4：-start-premain——SystemInit-与-C-构造"><a href="#6-Stage-4：-start-premain——SystemInit-与-C-构造" class="headerlink" title="6. Stage 4：_start_premain——SystemInit 与 C++ 构造"></a>6. Stage 4：_start_premain——SystemInit 与 C++ 构造</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">_start_premain:</span><br><span class="line">    call SystemInit                /* 芯片级早期初始化 */</span><br><span class="line">    call __libc_init_array         /* C++ 全局构造 + _init */</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-1-SystemInit"><a href="#6-1-SystemInit" class="headerlink" title="6.1 SystemInit()"></a>6.1 SystemInit()</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">SystemInit</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* ToDo: add code to initialize the system</span></span><br><span class="line"><span class="comment">     * Warn: do not use global variables because this function is called before</span></span><br><span class="line"><span class="comment">     * reaching pre-main. RW section maybe overwritten afterwards.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当前是一个<strong>空壳实现</strong>，应在此填充 PLL 配置、外部时钟源初始化、Flash 控制器时序配置等。由于 <code>__libc_init_array</code> 可能在内部重写 .data&#x2F;.bss 段，<code>SystemInit()</code> 中只能做<strong>纯寄存器操作</strong>。</p>
+<h3 id="6-2-libc-init-array"><a href="#6-2-libc-init-array" class="headerlink" title="6.2 __libc_init_array()"></a>6.2 __libc_init_array()</h3><p>此函数来自 GCC 工具链的 <code>libc_nano.a</code>。它依次执行：<code>_init()</code> → 遍历 <code>.init_array</code> 段（C++ 全局对象构造发生在这里） → 设置 <code>atexit</code> 处理链。</p>
+<hr>
+<h1 id="7-Stage-5：-skip-init——多核同步与-premain-init"><a href="#7-Stage-5：-skip-init——多核同步与-premain-init" class="headerlink" title="7. Stage 5：__skip_init——多核同步与 _premain_init"></a>7. Stage 5：__skip_init——多核同步与 _premain_init</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">__skip_init:</span><br><span class="line">    call __sync_harts              /* 多核同步屏障 */</span><br><span class="line">    call _premain_init             /* 板级全面初始化 */</span><br><span class="line">    /* 使能 BPU（分支预测单元） */</span><br><span class="line">    li t0, MMISC_CTL_BPU</span><br><span class="line">    csrs CSR_MMISC_CTL, t0</span><br><span class="line">    /* 调用 main */</span><br><span class="line">    li a0, 0                       /* argc = 0 */</span><br><span class="line">    li a1, 0                       /* argv = NULL */</span><br><span class="line">    call main</span><br><span class="line">    call _postmain_fini</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-1-sync-harts-——多核同步屏障"><a href="#7-1-sync-harts-——多核同步屏障" class="headerlink" title="7.1 __sync_harts()——多核同步屏障"></a>7.1 __sync_harts()——多核同步屏障</h3><p>通过 CLINT 的 MSIP（Machine Software Interrupt Pending）寄存器实现核间同步：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">时间线：</span><br><span class="line"></span><br><span class="line">主核：搬运 .text → 搬运 .data → 清 .bss → __libc_init_array</span><br><span class="line">                                               │</span><br><span class="line">                                               ▼</span><br><span class="line">                                        __sync_harts</span><br><span class="line">                                         │ 使能 SMP/L2</span><br><span class="line">                                         │ 等待 MSIP[1..n]=1</span><br><span class="line">                                         │      ↑</span><br><span class="line">                                         │      │</span><br><span class="line">从核1：__amp_wait(WFI) → 被 MSIP 唤醒 → __sync_harts</span><br><span class="line">                                         │ 置位 MSIP[1]=1</span><br><span class="line">                                         │ 等待 MSIP[1]=0</span><br><span class="line">                                         │      ↓</span><br><span class="line">主核：  MSIP[1]=1 收到          ←───────┘</span><br><span class="line">       │ 清除所有 MSIP</span><br><span class="line">       │ 继续执行 _premain_init        → 从核被释放，继续执行</span><br></pre></td></tr></table></figure>
+
+<p>主核负责所有的内存初始化，从核在这些共享资源准备好之前不能进入 <code>_premain_init</code>。</p>
+<h3 id="7-2-premain-init-——真正的板级初始化核心"><a href="#7-2-premain-init-——真正的板级初始化核心" class="headerlink" title="7.2 _premain_init()——真正的板级初始化核心"></a>7.2 _premain_init()——真正的板级初始化核心</h3><p><strong>主核执行路径</strong>：</p>
+<ul>
+<li>配置 ILM&#x2F;DLM（使能&#x2F;禁用 + ECC 开关）</li>
+<li>配置 I-Cache &#x2F; D-Cache（运行时检测 + ECC + 使能）</li>
+<li>探测 CPU IRegion 基址，使能全局预取</li>
+<li>配置 L2 Cache &#x2F; BPU</li>
+<li><code>get_system_clock()</code> 测量&#x2F;读取 CPU 频率</li>
+<li><code>uart_init()</code> 串口初始化</li>
+<li><code>Exception_Init()</code> 初始化异常处理表</li>
+<li><code>Interrupt_Init()</code> 初始化中断控制器（ECLIC&#x2F;PLIC&#x2F;CLINT）</li>
+</ul>
+<p><strong>从核执行路径</strong>：</p>
+<ul>
+<li>自旋等待主核设置好 <code>CpuIRegionBase</code></li>
+<li>仅调用 <code>Interrupt_Init()</code></li>
+</ul>
+<p><strong>get_system_clock()——频率测量</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">uint32_t</span> <span class="title function_">get_system_clock</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (__RV_CSR_READ(CSR_MCYCLE) == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> SYSTEM_CLOCK;            <span class="comment">// 默认 16 MHz</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> get_cpu_freq();              <span class="comment">// 实际测量</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Exception_Init()——异常处理框架</strong>：初始化长度为 27 的异常处理函数指针表，全部指向 <code>system_default_exception_handler</code>。同时设置 <code>CSR_MSCRATCH</code> 为栈顶地址。</p>
+<p><strong>Interrupt_Init()——中断控制器初始化</strong>：根据 SoC 配置选择 ECLIC&#x2F;PLIC&#x2F;CLINT。默认使用 ECLIC（Enhanced Core Local Interrupt Controller）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ECLIC 模式的异常/中断入口切换：</span><br><span class="line"></span><br><span class="line">启动早期：    MTVEC = early_exc_entry   ← 简单 WFI 死循环</span><br><span class="line">_premain_init 后：</span><br><span class="line">             MTVEC = exc_entry | 0x3   ← 完整异常入口（CLIC 模式）</span><br><span class="line">             MTVT  = vector_base        ← 向量中断表</span><br><span class="line">             MTVT2 = irq_entry          ← 非向量中断入口</span><br></pre></td></tr></table></figure>
+
+<p><code>exc_entry | 0x3</code> 中最低两位表示使用 <strong>CLIC 向量中断模式</strong>——CPU 硬件会根据中断号自动从 <code>mtvt</code> 指向的向量表中加载中断服务例程，无需软件分发。</p>
+<hr>
+<h1 id="8-Stage-6：main——用户应用程序"><a href="#8-Stage-6：main——用户应用程序" class="headerlink" title="8. Stage 6：main——用户应用程序"></a>8. Stage 6：main——用户应用程序</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Core Running at 0x%lx, Current Hart ID: %d\r\n&quot;</span>,</span><br><span class="line">           __RV_CSR_READ(CSR_MARCHID), __get_hart_id());</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;CPU Feature Probe Start\r\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 读取关键 CSR */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">long</span> marchid = __RV_CSR_READ(CSR_MARCHID);</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">long</span> mimpid  = __RV_CSR_READ(CSR_MIMPID);</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">long</span> misa    = __RV_CSR_READ(CSR_MISA);</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">long</span> mhartid = __RV_CSR_READ(CSR_MHARTID);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 探测 CPU 特性并打印 */</span></span><br><span class="line">    show_cpuinfo();</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>到 <code>main()</code> 执行时，以下环境已经就绪：</p>
+<table>
+<thead>
+<tr>
+<th>资源</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>栈指针 SP</td>
+<td>指向 DLM 顶部，可用</td>
+</tr>
+<tr>
+<td>全局指针 GP</td>
+<td><code>.sdata</code> GP-relative 寻址可用</td>
+</tr>
+<tr>
+<td>线程指针 TP</td>
+<td>TLS 基址已设（RTOS 准备）</td>
+</tr>
+<tr>
+<td>I-Cache &#x2F; D-Cache</td>
+<td>已使能</td>
+</tr>
+<tr>
+<td>FPU &#x2F; Vector</td>
+<td>已使能，状态为 Initial</td>
+</tr>
+<tr>
+<td><code>.text</code> &#x2F; <code>.data</code> &#x2F; <code>.bss</code></td>
+<td>已搬运初始化</td>
+</tr>
+<tr>
+<td>C++ 全局对象</td>
+<td>已构造</td>
+</tr>
+<tr>
+<td>异常处理表</td>
+<td>所有异常有默认 handler</td>
+</tr>
+<tr>
+<td>中断控制器</td>
+<td>ECLIC&#x2F;PLIC&#x2F;CLINT 已配置</td>
+</tr>
+<tr>
+<td>UART 串口</td>
+<td>已初始化（115200 bps）</td>
+</tr>
+<tr>
+<td>系统时钟</td>
+<td><code>SystemCoreClock</code> 已设置</td>
+</tr>
+<tr>
+<td>L2 Cache &#x2F; BPU</td>
+<td>已使能</td>
+</tr>
+<tr>
+<td>多核同步</td>
+<td>所有核已到达同步点</td>
+</tr>
+</tbody></table>
+<hr>
+<h1 id="9-Stage-7：-postmain-fini——善后与仿真退出"><a href="#9-Stage-7：-postmain-fini——善后与仿真退出" class="headerlink" title="9. Stage 7：_postmain_fini——善后与仿真退出"></a>9. Stage 7：_postmain_fini——善后与仿真退出</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> _postmain_fini(<span class="type">int</span> status)</span><br><span class="line">&#123;</span><br><span class="line"><span class="meta">#<span class="keyword">if</span> defined(CODESIZE) &amp;&amp; (CODESIZE == 1)</span></span><br><span class="line">    SIMULATION_EXIT(status);</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">    <span class="keyword">extern</span> <span class="type">void</span> <span class="title function_">simulation_exit</span><span class="params">(<span class="type">int</span> status)</span>;</span><br><span class="line">    simulation_exit(status);</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当 <code>main()</code> 返回时执行 <code>_postmain_fini()</code>。在仿真场景中通过 UART 写特定值通知仿真器终止；在真实硬件上，此函数应做适当的系统关断处理。</p>
+<hr>
+<h1 id="10-完整调用链"><a href="#10-完整调用链" class="headerlink" title="10. 完整调用链"></a>10. 完整调用链</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">_start (startup_evalsoc.S:157)</span><br><span class="line">│ 关中断、核识别</span><br><span class="line">│ GP/TP/Zcmt 初始化</span><br><span class="line">│ SP 初始化</span><br><span class="line">│ NMI 共享 / Zc 硬件开关</span><br><span class="line">│ MTVEC = early_exc_entry</span><br><span class="line">│ FPU 使能、Vector 使能</span><br><span class="line">│ Cache 使能（单核模式）</span><br><span class="line">│ mcycle/minstret 使能</span><br><span class="line">│</span><br><span class="line">├─→ __init_common (startup_evalsoc.S:289)</span><br><span class="line">│   ├─ 搬 .text (fence.i)</span><br><span class="line">│   ├─ 搬 .data</span><br><span class="line">│   └─ 清 .bss</span><br><span class="line">│</span><br><span class="line">├─→ _start_premain (startup_evalsoc.S:342)</span><br><span class="line">│   ├─ call SystemInit()                    ← system_evalsoc.c:217</span><br><span class="line">│   └─ call __libc_init_array()             ← GCC libc_nano.a</span><br><span class="line">│</span><br><span class="line">├─→ __skip_init (startup_evalsoc.S:363)</span><br><span class="line">│   ├─ call __sync_harts()                  ← system_evalsoc.c:1316</span><br><span class="line">│   ├─ call _premain_init()                 ← system_evalsoc.c:1411</span><br><span class="line">│   │   ├─ ILM/DLM 配置</span><br><span class="line">│   │   ├─ I/D Cache 配置/使能</span><br><span class="line">│   │   ├─ 读 CpuIRegionBase</span><br><span class="line">│   │   ├─ L2 Cache / BPU 使能</span><br><span class="line">│   │   ├─ [主核] get_system_clock()</span><br><span class="line">│   │   ├─ [主核] uart_init()</span><br><span class="line">│   │   ├─ [主核] SystemBannerPrint()</span><br><span class="line">│   │   ├─ [主核] Exception_Init()</span><br><span class="line">│   │   └─ [主核] Interrupt_Init()</span><br><span class="line">│   │       └─ ECLIC_Interrupt_Init()</span><br><span class="line">│   │           ├─ MTVT = vector_base</span><br><span class="line">│   │           ├─ MTVT2 = irq_entry</span><br><span class="line">│   │           ├─ MTVEC = exc_entry | 3</span><br><span class="line">│   │           └─ ECLIC 配置</span><br><span class="line">│   ├─ BPU 使能</span><br><span class="line">│   └─ call main()                          ← application/main.c</span><br><span class="line">│</span><br><span class="line">└─→ call _postmain_fini()                   ← system_evalsoc.c:1623</span><br></pre></td></tr></table></figure>
+
+<hr>
+<blockquote>
+<p>如果觉得本文有帮助，欢迎关注公众号「菠菜的碎碎念」，获取更多技术干货。</p>
+</blockquote>
+<p><img src="/images/qrcode.jpg" alt="公众号二维码"></p>
+
+      </div>
+    </div>
+    
+      <script src='https://unpkg.com/mermaid@latest/dist/mermaid.min.js'></script>
+      <script>
+        if (window.mermaid) {
+          mermaid.initialize({"startOnload":true});
+        }
+      </script>
+    
+  </article>
+  <div class="post__foot">
+    
+      <div class="like-author">
+  <input type="checkbox" id="likeCode" />
+  <div class="author-face">
+    <img height="100px"
+         width="100px"
+         id="front-face"
+         alt="author face"
+         src="/images/author.jpg" />
+    <img height="100px"
+         width="100px"
+         id="back-face"
+         alt="like code"
+         src="/images/pay.png" />
+  </div>
+  <div class="like-text">“给作者倒杯卡布奇诺”</div>
+  <label for="likeCode" class="like-btn">
+    <svg viewBox="0 0 1024 1024"
+         width="20px"
+         style="margin-right: 10px"
+         height="20px">
+      <path d="M466.88 908.96L113.824 563.296a270.08 270.08 0 0 1 0-387.392c108.8-106.56 284.896-106.56 393.696 0 1.504 1.472 2.976 2.944 4.448 4.48 1.472-1.536 2.944-3.008 4.448-4.48 108.8-106.56 284.896-106.56 393.696 0a269.952 269.952 0 0 1 34.016 347.072l-387.392 385.6a64 64 0 0 1-89.92 0.384z" p-id="13650" fill="#ee4242" />
+    </svg>
+    喜欢作者
+  </label>
+</div>
+
+    
+    <div class="post-nav">
+  
+    <div class="post-nav-item-left"></div>
+  
+  <div class="vhr"></div>
+  
+    <a class="post-nav-item-right" href="/2026/07/04/2026-07-04-A%E8%82%A1%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E5%85%A8%E7%90%83%E6%9C%80%E9%80%82%E5%90%88%E6%8D%A1%E4%BE%BF%E5%AE%9C%E7%9A%84%E5%B8%82%E5%9C%BA/">
+      <div class="text-align">
+        <span class="text-small">下一篇</span>
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             transform="scale(-1,-1)"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596" />
+        </svg>
+      </div>
+      A股为什么是全球最适合"捡便宜"的市场
+    </a>
+  
+</div>
+
+    
+      <div class="related-post">
+  <div class="related__head">
+  <a href="/tags/RISC-V/" class="post-tag">#RISC-V</a><a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="post-tag">#嵌入式</a><a href="/tags/%E8%A3%B8%E6%9C%BA%E7%BC%96%E7%A8%8B/" class="post-tag">#裸机编程</a><a href="/tags/Nuclei/" class="post-tag">#Nuclei</a><a href="/tags/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/" class="post-tag">#启动流程</a><a href="/tags/CPU%E6%9E%B6%E6%9E%84/" class="post-tag">#CPU架构</a>
+
+</div>
+  <div class="realated__body">
+    
+      <div class="null"><div class="null-item"><div class="null-title"><a href="/2026/03/14/2026-03-14-OpenClaw安装部署全攻略/" title="OpenClaw 安装部署全攻略 - 最强 AI 助手本地运行指南" rel="bookmark">OpenClaw 安装部署全攻略 - 最强 AI 助手本地运行指南</a></div></div><div class="null-item"><div class="null-title"><a href="/2026/06/22/2026-06-22-PCI的中断机制MSI-X/" title="PCI 的中断机制 MSI-X：从驱动配置到硬件触发的完整流程" rel="bookmark">PCI 的中断机制 MSI-X：从驱动配置到硬件触发的完整流程</a></div></div></div>
+    
+  </div>
+</div>
+
+    
+    
+      <div id="gitalk-container"></div>
+    
+  </div>
+
+    </div>
+    <div class="foot">
+      <div class="foot-inner">
+        <div class="foot__head">
+          
+            <div class="foot-line">
+              <div class="matts">海</div><div class="matts">内</div><div class="matts">存</div><div class="matts">知</div><div class="matts">己</div>
+            </div>
+          
+            <div class="foot-line">
+              <div class="matts">天</div><div class="matts">涯</div><div class="matts">若</div><div class="matts">比</div><div class="matts">邻</div>
+            </div>
+          
+        </div>
+        <div class="foot__body">
+          
+          
+            <div class="foot-item">
+              <div class="foot-item__head">账号</div>
+              <div class="foot-item__body">
+                
+                  <div class="text">
+                    <img alt="link" height="20px" width="20px" src="/images/logo-github.svg" />
+                    <a class="foot-link" target="_blank" rel="noopener" href="https://github.com/Laicise">Laicize</a>
+                  </div>
+                
+              </div>
+            </div>
+          
+          <div class="foot-item">
+            <div class="foot-item__head">联系</div>
+            <div class="foot-item__body">
+              <div class="text">
+                <img alt="link" height="20px" width="20px" src="/images/icon/icon-email.svg" />
+                <a class="foot-link" href="mailto:wenrenmoke12@gmail.com">wenrenmoke12@gmail.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <a href="https://laicise.github.io">文客 | 菠菜</a> &nbsp;|&nbsp;由&nbsp;<a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>&nbsp;及&nbsp;
+          <svg width="20" height="20" viewBox="0 0 725 725">
+            <path fill-rule="evenodd" fill="rgb(221, 221, 221)" d="M145.870,236.632 L396.955,103.578 L431.292,419.44 L156.600,522.53 L145.870,236.632 Z" />
+            <path fill-rule="evenodd" fill="rgb(159, 159, 159)" d="M396.955,103.578 L564.345,234.486 L611.558,513.469 L431.292,419.44 L396.955,103.578 Z" />
+            <path fill-rule="evenodd" fill="rgb(0, 0, 0)" d="M431.292,419.44 L611.558,513.469 L358.327,595.18 L156.600,522.53 L431.292,419.44 Z" />
+          </svg>
+          <a target="_blank" rel="noopener" href="https://github.com/hooozen/hexo-theme-tranquility">致远</a>&nbsp;驱动
+        </div>
+      </div>
+    </div>
+    
+      <script src="https://unpkg.com/js-polyfills@0.1.43/es6.js"></script>
+      <script id="MathJax-script"
+              async
+              src="https://www.unpkg.com/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    
+    
+      <script src="/js/search.js"></script>
+      <script>searchInitialize("/search.json")</script>
+    
+    
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+  const param = JSON.parse('{"enable":true,"owner":"Laicise","admin":["Laicise"],"repo":"Laicise.github.io","clientID":"Ov23liA4XXVSKAlHdu95","clientSecret":"cc9faf7a00291852aa82555634266b5434fb8cc0","distractionFreeMode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN"}')
+  let title = location.pathname.substr(0, 50); 
+  param.id = title
+  const gitalk = new Gitalk(param)
+  gitalk.render('gitalk-container')
+</script>
+
+  
+
+  </body>
+</html>
